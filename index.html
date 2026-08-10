@@ -409,6 +409,10 @@ a:hover{color:#ffe9a8}
         </div>
 
         <sc-if value="{{ tabChat }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 11px;border-radius:11px;background:linear-gradient(180deg,rgba(145,70,255,.14),rgba(20,6,44,.5));border:1px solid rgba(169,123,255,.4)">
+            <div style="{{ liveDot }}"></div>
+            <div style="{{ liveStatusStyle }}">{{ liveStatus }}</div>
+          </div>
           <div style="position:relative;flex:1 1 auto;min-height:min(58vh,520px);overflow:hidden">
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:5px;justify-content:flex-end;overflow:hidden">
               <sc-for list="{{ chat }}" as="m" hint-placeholder-count="26">
@@ -567,7 +571,9 @@ class Component extends DCLogic {
     msg:'ENGINE LÄDT…', tab:'chat', chat:[],
     dbg:null, history:[], spinNo:0,
     sim:{ running:false, progress:0, stats:null },
-    tests:[], sound:false, armed:null, flameShow:false, spamOpen:false, spamKind:null, spamLeft:0, soundError:null, introOpen:true,
+    tests:[], sound:false,
+    twitch:{ on:false, channel:'', status:'aus' },
+    chanInput:'kubafps', armed:null, flameShow:false, spamOpen:false, spamKind:null, spamLeft:0, soundError:null, introOpen:true,
     track:0, vol:0.32
   };
 
@@ -758,16 +764,8 @@ class Component extends DCLogic {
 
   async componentDidMount(){
     this._m = true;
-    const seed = [];
-    for (let i=0;i<30;i++) seed.push(this.mkMsg());
-    this.setState({ chat: seed });
-    const beat = ()=>{
-      if (!this._m) return;
-      this.pushChat(Math.random() < 0.045 ? this.mkModMsg() : this.mkMsg());
-      if (Math.random() < 0.28) setTimeout(()=>{ if (this._m) this.pushChat(this.mkMsg()); }, 180 + Math.random()*260);
-      this._chatTimer = setTimeout(beat, 620 + Math.random()*1500);
-    };
-    this._chatTimer = setTimeout(beat, 700);
+    /* Nur echter Twitch-Chat — keine erfundenen Nachrichten mehr. */
+    this.connectTwitch('kubafps');
     try {
       const [gm, en, cl] = await Promise.all([ import('./gameMath.js'), import('./engine.js'), import('./chatLines.js') ]);
       if (!this._m) return;
@@ -786,6 +784,8 @@ class Component extends DCLogic {
     this._m=false; clearTimeout(this._chatTimer); clearTimeout(this._autoTimer); clearTimeout(this._flameTimer); clearTimeout(this._boomTimer); clearInterval(this._spamTimer);
     if (this._audio) this._audio.pause();
     if (this._fsSfx) this._fsSfx.pause();
+    this._twitchWant = false;
+    this.closeSocket();
     if (this.simEngine) this.simEngine.cancel();
   }
 
@@ -853,7 +853,100 @@ class Component extends DCLogic {
     if (this._m && this.state.spamKind) this.setState({ spamKind:null, spamLeft:0 });
   }
   pushChat(msg){ this.setState(s=>({ chat:s.chat.concat([msg]).slice(-44) })); }
-  hype(t){ this.pushChat(this.mkMsg(t, true)); }
+
+  /* ---------- echter Twitch-Chat -------------------------------------------
+     Anonymes Mitlesen über Twitch IRC per WebSocket: kein Token, kein Backend,
+     funktioniert auf einer statischen Seite. Nur lesen, nicht senden.        */
+  cleanChannel(v){
+    return String(v||'').trim().toLowerCase()
+      .replace(/^https?:\/\/(www\.)?twitch\.tv\//,'')
+      .replace(/[#@\/\s?].*$/,'');
+  }
+  connectTwitch(raw){
+    const ch = this.cleanChannel(raw !== undefined ? raw : this.state.chanInput);
+    if (!ch){ this.setState({ twitch:{ on:false, channel:'', status:'kanal fehlt' } }); return; }
+    this.closeSocket();
+    this._twitchWant = true;
+    this.setState({ twitch:{ on:true, channel:ch, status:'verbinde…' }, chanInput:ch });
+    this.openSocket(ch);
+  }
+  openSocket(ch){
+    let ws;
+    try { ws = new WebSocket('wss://irc-ws.chat.twitch.tv:443'); }
+    catch(e){ this.setState(s=>({ twitch:Object.assign({}, s.twitch, { status:'fehler' }) })); return; }
+    this._ws = ws;
+    ws.onopen = ()=>{
+      ws.send('CAP REQ :twitch.tv/tags');
+      ws.send('PASS SCHMOOPIIE');
+      ws.send('NICK justinfan' + (10000 + Math.floor(Math.random()*89999)));
+      ws.send('JOIN #' + ch);
+      if (this._m) this.setState(s=>({ twitch:Object.assign({}, s.twitch, { status:'verbunden' }) }));
+    };
+    ws.onmessage = (ev)=>{
+      const lines = String(ev.data).split('\r\n');
+      for (const line of lines){
+        if (!line) continue;
+        if (line.indexOf('PING') === 0){ ws.send('PONG :tmi.twitch.tv'); continue; }
+        const msg = this.parseIrc(line);
+        if (msg && this._m) this.pushChat(msg);
+      }
+    };
+    ws.onclose = ()=>{
+      if (!this._m || !this._twitchWant) return;
+      this.setState(s=>({ twitch:Object.assign({}, s.twitch, { status:'neu verbinden…' }) }));
+      clearTimeout(this._reWs);
+      this._reWs = setTimeout(()=>{ if (this._m && this._twitchWant) this.openSocket(ch); }, 4000);
+    };
+    ws.onerror = ()=>{
+      if (this._m) this.setState(s=>({ twitch:Object.assign({}, s.twitch, { status:'fehler' }) }));
+    };
+  }
+  closeSocket(){
+    clearTimeout(this._reWs);
+    if (this._ws){
+      try { this._ws.onclose = null; this._ws.close(); } catch(e){}
+      this._ws = null;
+    }
+  }
+  disconnectTwitch(){
+    this._twitchWant = false;
+    this.closeSocket();
+    this.setState({ twitch:{ on:false, channel:'', status:'aus' } });
+  }
+  parseIrc(line){
+    const tags = {};
+    let rest = line;
+    if (line.charAt(0) === '@'){
+      const sp = line.indexOf(' ');
+      if (sp < 0) return null;
+      line.slice(1, sp).split(';').forEach(p=>{
+        const eq = p.indexOf('=');
+        if (eq > 0) tags[p.slice(0, eq)] = p.slice(eq + 1);
+      });
+      rest = line.slice(sp + 1);
+    }
+    const at = rest.indexOf(' PRIVMSG ');
+    if (at < 0) return null;
+    const after = rest.slice(at + 9);
+    const colon = after.indexOf(' :');
+    if (colon < 0) return null;
+    const text = after.slice(colon + 2);
+    if (!text) return null;
+    let name = tags['display-name'];
+    if (!name){
+      const bang = rest.indexOf('!');
+      name = bang > 1 ? rest.slice(1, bang) : 'twitch';
+    }
+    const badges = tags['badges'] || '';
+    const mod = tags['mod'] === '1' || badges.indexOf('moderator') >= 0 || badges.indexOf('broadcaster') >= 0;
+    const sub = badges.indexOf('subscriber') >= 0 || badges.indexOf('founder') >= 0;
+    let color = tags['color'];
+    if (!color || color.length < 4) color = this.COLORS[name.length % this.COLORS.length];
+    const link = text.match(/https?:\/\/[^\s]+/);
+    return { n:name, c:color, m:text, k:++this._id, live:true, mod, sub,
+             href: link ? link[0] : null };
+  }
+  hype(t){ /* keine erfundenen Chat-Reaktionen mehr */ }
 
   anteCfg(){ return this.math.anteBetParameters[this.state.ante]; }
   spinCost(){ return this.state.bet * this.anteCfg().costMultiplier; }
@@ -1521,8 +1614,9 @@ class Component extends DCLogic {
 
       chat: s.chat.map(m=>({ n:m.n, m:m.m, k:m.k, href:m.href || '#',
         isLink: !!m.href, isPlain: !m.href,
-        badge: m.mod ? '⚔ ' : '',
-        badgeStyle: m.mod ? { color:'#5fe08a', fontWeight:700 } : { display:'none' },
+        badge: m.mod ? '⚔ ' : (m.sub ? '★ ' : ''),
+        badgeStyle: m.mod ? { color:'#5fe08a', fontWeight:700 }
+          : m.sub ? { color:'#a97bff', fontWeight:700 } : { display:'none' },
         ns:{ color:m.c, fontWeight:700 },
         linkStyle:{ color:'#7fd4ff', fontWeight:700, textDecoration:'underline' },
         ms:{ color:m.hot ? '#f5c542' : '#b8c8de', fontWeight:m.hot ? 700 : 400 } })),
@@ -1549,6 +1643,16 @@ class Component extends DCLogic {
           background:'linear-gradient(180deg,rgba(245,197,66,.2),rgba(70,48,0,.5))',
           border:'1px solid rgba(245,197,66,.55)', color:'#ffe9a8' }
       })),
+
+      liveDot: { width:'8px', height:'8px', flex:'0 0 auto', borderRadius:'50%',
+        background: s.twitch.status === 'verbunden' ? '#5fe08a' : s.twitch.on ? '#f5c542' : '#4d5b70',
+        boxShadow: s.twitch.on ? '0 0 10px currentColor' : 'none',
+        animation: s.twitch.on && s.twitch.status !== 'verbunden' ? 'glowPulse .8s ease-in-out infinite' : 'none' },
+      liveStatus: s.twitch.status === 'verbunden'
+        ? 'LIVE · #' + s.twitch.channel
+        : s.twitch.on ? '#' + s.twitch.channel + ' · ' + s.twitch.status : 'getrennt',
+      liveStatusStyle: { fontSize:'9.5px', fontWeight:700, letterSpacing:'.16em',
+        color: s.twitch.status === 'verbunden' ? '#8fe0a8' : s.twitch.status === 'fehler' ? '#ffb3c7' : '#b39aff' },
 
       tabChat: s.tab==='chat', tabDebug: s.tab==='debug', tabSim: s.tab==='sim', tabTests: s.tab==='tests',
       simRunning: s.sim.running,
