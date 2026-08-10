@@ -62,13 +62,14 @@ function payCurve(base) {
 }
 
 /* Reihenfolge = Wertigkeit. UNKNOWN. */
-/* PAY ANYWHERE ab 9 gleichen. Auf RTP 96,55 % kalibriert (Monte-Carlo, 4 Laeufe
-   a 260k Spins, Target Math, Ante aus): gemessen 96,6 % ± 2 pp Stichprobenrauschen, Hit Rate ~48 %,
-   Trigger ~1/112. KURVENFORM = UNKNOWN_PUBLIC_PROBABILITY. */
+/* PAY ANYWHERE ab 9 gleichen. Auf RTP 96,55 % kalibriert — Monte-Carlo mit
+   500.000 Spins (Target Math, Ante aus): 97,744 % vor der Korrektur, Faktor
+   0,98779 angewendet. Hit Rate ~47,8 %, Trigger ~1/107, Freispielanteil ~58 %.
+   KURVENFORM = UNKNOWN_PUBLIC_PROBABILITY. */
 const CLUSTER_BASE = {
-  a: 0.0213, j: 0.0260, q: 0.0301, k: 0.0367,
-  pills: 0.0564, dumbbell: 0.0738, whey: 0.0954,
-  peptid: 0.1735, testo: 0.3253, tanga: 0.6942
+  a: 0.02065, j: 0.02519, q: 0.02914, k: 0.03556,
+  pills: 0.05463, dumbbell: 0.07142, whey: 0.09226,
+  peptid: 0.16793, testo: 0.31471, tanga: 0.67180
 };
 
 function buildPayouts() {
@@ -186,19 +187,20 @@ function baseConfig() {
 export const TARGET_MATH = baseConfig();
 
 /* --- DEMO MATH -------------------------------------------------------------
-   Klar gekennzeichnete Vorfuehr-Mathematik. Trigger und Multiplikatoren sind
+   Klar gekennzeichnete Vorfuehr-Mathematik: Trigger und Multiplikatoren sind
    bewusst haeufiger, damit sich alle Features im Stream zeigen lassen.
-   Das sind AUSDRUECKLICH KEINE Fortune-of-Olympus-Wahrscheinlichkeiten.      */
+   Kalibriert auf ~1/40 Trigger und ~140 % RTP. Das sind AUSDRUECKLICH KEINE
+   Fortune-of-Olympus-Wahrscheinlichkeiten.                                   */
 export const DEMO_MATH = (() => {
   const m = baseConfig();
   m.id = 'demo';
   m.label = 'DEMO MATH';
   m.isDemo = true;
   m.rtpTarget = null;
-  m.multiplierChance = { base: 0.010, tumble: 0.009, freeSpins: 0.024 };
-  m.scatterChance = { base: 0.043, tumble: 0.014, freeSpins: 0.019 };
-  m.baseGameScatterChance = 0.043;
-  m.multiplierWeights = [3400, 2500, 1650, 1100, 760, 500, 320, 200, 125, 72, 40, 13, 3.6, 0.7, 0.16];
+  m.multiplierChance = { base: 0.0058, tumble: 0.0055, freeSpins: 0.0105 };
+  m.scatterChance = { base: 0.0205, tumble: 0.0058, freeSpins: 0.0068 };
+  m.baseGameScatterChance = 0.0205;
+  m.multiplierWeights = [3900, 2700, 1720, 1120, 740, 470, 285, 168, 100, 55, 30, 9, 2.2, 0.4, 0.09];
   m.symbolWeights = { pills: 120, dumbbell: 116, whey: 112, peptid: 100, testo: 86, tanga: 70, a: 106, j: 100, q: 94, k: 86 };
   return m;
 })();
