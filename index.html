@@ -153,6 +153,40 @@ a:hover{color:#ffe9a8}
         <div onClick="{{ openPaytable }}" style="padding:9px;border-radius:11px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.18em;background:linear-gradient(180deg,#1d283f,#0b1220);border:1px solid rgba(245,197,66,.32);cursor:pointer;user-select:none;color:#e5d5a8" style-hover="border-color:rgba(245,197,66,.8)">PAYTABLE &amp; REGELN</div>
       </div>
 
+      <div style="flex:0 0 auto;width:clamp(252px,20vw,330px);order:1;display:flex;flex-direction:column;gap:11px;padding:17px 16px 15px;border-radius:16px;background:linear-gradient(180deg,rgba(3,8,18,.56),rgba(1,3,9,.7));border:1px solid rgba(255,46,166,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.65)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <div style="font-family:Anton,sans-serif;font-size:14px;letter-spacing:.24em;color:#ff8ade">MUSIK</div>
+          <div onClick="{{ toggleSound }}" style="{{ musicPowerStyle }}">{{ musicPowerLabel }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ trackOptions }}" as="t" hint-placeholder-count="10">
+            <div onClick="{{ t.click }}" style="{{ t.style }}">
+              <div style="{{ t.badge }}">{{ t.num }}</div>
+              <div style="flex:1;min-width:0">
+                <div style="{{ t.titleStyle }}">{{ t.title }}</div>
+                <div style="{{ t.artistStyle }}">{{ t.artist }}</div>
+              </div>
+              <div style="{{ t.eqStyle }}">{{ t.eqIcon }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:10px">
+          <div onClick="{{ toggleSound }}" style="{{ volIconStyle }}">{{ volIcon }}</div>
+          <div ref="{{ volRef }}" onPointerDown="{{ volDown }}" onPointerMove="{{ volMove }}" onPointerUp="{{ volUp }}" onPointerCancel="{{ volUp }}" style="position:relative;flex:1;height:38px;display:flex;align-items:flex-end;gap:2px;cursor:ew-resize;touch-action:none">
+            <sc-for list="{{ volBars }}" as="b" hint-placeholder-count="15">
+              <div style="{{ b.s }}"></div>
+            </sc-for>
+            <div style="{{ volSeam }}"></div>
+          </div>
+          <div style="{{ volNumStyle }}">{{ volTxt }}</div>
+        </div>
+        <div style="{{ musicNoteStyle }}">{{ musicNote }}</div>
+        <div style="position:relative;margin-top:4px;display:flex;align-items:flex-end;justify-content:center">
+          <div style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:68%;height:12px;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.7),transparent 72%);filter:blur(4px)"></div>
+          <img src="symbols/lukas.png" alt="" style="position:relative;display:block;width:100%;max-width:250px;height:auto;object-fit:contain;filter:drop-shadow(0 0 1px #f5c542) drop-shadow(0 0 1px #f5c542) drop-shadow(0 0 2px #ffe9a8) drop-shadow(0 0 12px rgba(245,197,66,.55)) drop-shadow(0 8px 20px rgba(0,0,0,.8))">
+        </div>
+      </div>
+
       <div style="display:flex;flex-direction:column;align-items:center;gap:9px;flex:1 1 600px;min-width:min(100%,580px);max-width:860px;order:2">
 
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center">
@@ -533,14 +567,55 @@ class Component extends DCLogic {
     msg:'ENGINE LÄDT…', tab:'chat', chat:[],
     dbg:null, history:[], spinNo:0,
     sim:{ running:false, progress:0, stats:null },
-    tests:[], sound:false, armed:null, flameShow:false, spamOpen:false, spamKind:null, spamLeft:0, soundError:null, introOpen:true
+    tests:[], sound:false, armed:null, flameShow:false, spamOpen:false, spamKind:null, spamLeft:0, soundError:null, introOpen:true,
+    track:0, vol:0.32
   };
+
+  /* Songwechsel: gleiche Audio-Instanz weiterverwenden, damit die
+     Autoplay-Freigabe des ersten Klicks nicht verloren geht. */
+  pickTrack(i){
+    const t = this.TRACKS[i];
+    if (!t) return;
+    /* Klick auf den laufenden Song pausiert bzw. startet ihn wieder. */
+    if (i === this.state.track){
+      if (this.state.sound) this.stopMusic(); else this.startMusic();
+      return;
+    }
+    this.MUSIC_SRC = t.src;
+    const a = this.initMusic();
+    const url = new URL(t.src, document.baseURI).href;
+    this._musicUrl = url;
+    this.setState({ track:i, soundError:null });
+    this._playToken++;
+    a.pause();
+    a.src = url;
+    a.loop = true;
+    this.startMusic();
+  }
+  setVol(v){
+    const vol = Math.max(0, Math.min(1, v));
+    this.MUSIC_VOL = vol;
+    if (this._audio) this._audio.volume = vol;
+    this.setState({ vol });
+  }
 
   closeIntro(withSound){
     this.setState({ introOpen:false });
     if (withSound) this.startMusic(); else this.stopMusic();
   }
 
+  TRACKS = [
+    { src:'audio/kuba-loop.mp3', title:'HUMANS',        artist:'Kardenal & SCARLETT · Hardtechno' },
+    { src:'audio/track2.mp3',    title:'SONNE',         artist:'POLTERGST' },
+    { src:'audio/track3.mp3',    title:'MAYBACH TRUCK', artist:'SHABAB' },
+    { src:'audio/track4.mp3',    title:'SKYFALL',       artist:'Adele' },
+    { src:'audio/track5.mp3',    title:'KUBA HAT SEINE SEELE VERKAUFT', artist:'TTP_Lukas' },
+    { src:'audio/track6.mp3',    title:'KUBA',          artist:'TTP_Lukas' },
+    { src:'audio/track7.mp3',    title:'PUSH UP',       artist:'Creeds' },
+    { src:'audio/track8.mp3',    title:'PRADA',         artist:'cassö, RAYE, D-Block Europe' },
+    { src:'audio/track9.mp3',    title:'BARBAROSSA',    artist:'TTP_Lukas' },
+    { src:'audio/track10.mp3',   title:'KUBA & SEINE GROSSE LIEBE', artist:'TTP_Lukas' }
+  ];
   MUSIC_SRC = 'audio/kuba-loop.mp3';
   MUSIC_VOL = 0.32;
   BOOM_SRC = 'audio/boom.mp3';
@@ -641,14 +716,21 @@ class Component extends DCLogic {
     if (this._m) this.setState({ sound:false, soundError:label });
   }
 
+  /* Wechselzaehler: ein spaeter aufloesendes play()-Promise darf ein
+     zwischenzeitliches pause() nicht ueberschreiben. */
+  _playToken = 0;
+
   async startMusic(){
     const a = this.initMusic();
+    const token = ++this._playToken;
     a.muted = false;
     a.volume = this.MUSIC_VOL;
     try {
       await a.play();
+      if (token !== this._playToken){ a.pause(); return; }
       if (this._m) this.setState({ sound:true, soundError:null });
     } catch(e){
+      if (token !== this._playToken) return;
       if (e && e.name === 'NotAllowedError'){
         if (this._m) this.setState({ sound:false, soundError:'KLICK NÖTIG' });
       } else if (e && e.name === 'AbortError'){
@@ -660,13 +742,17 @@ class Component extends DCLogic {
     }
   }
   stopMusic(){
-    if (!this._audio) return;
-    this._audio.pause();
+    this._playToken++;
+    if (this._audio){ this._audio.pause(); this._audio.muted = true; }
     if (this._m) this.setState({ sound:false });
   }
 
   toggleSound(){
-    if (this.state.soundError){ this._audio = null; this.setState({ soundError:null }); }
+    if (this.state.soundError){
+      if (this._audio){ this._audio.pause(); this._audio.src = ''; }
+      this._audio = null;
+      this.setState({ soundError:null });
+    }
     if (this.state.sound) this.stopMusic(); else this.startMusic();
   }
 
@@ -1254,6 +1340,88 @@ class Component extends DCLogic {
         color: M && M.isDemo ? '#ffb3e2' : '#ffe9a8' },
       toggleMath: ()=>this.switchMath(),
       toggleSound: ()=>this.toggleSound(),
+
+      trackOptions: this.TRACKS.map((t,i)=>{
+        const on = s.track === i, playing = on && s.sound;
+        return {
+          num: String(i+1), title: t.title, artist: t.artist,
+          click: ()=>this.pickTrack(i),
+          style: { display:'flex', alignItems:'center', gap:'11px', padding:'11px 11px', borderRadius:'12px',
+            cursor:'pointer', userSelect:'none',
+            background: on ? 'linear-gradient(180deg,rgba(255,110,199,.34),rgba(74,0,44,.72))' : 'linear-gradient(180deg,#161f33,#0a1120)',
+            border:'1px solid '+(on ? 'rgba(255,150,225,.75)' : 'rgba(255,255,255,.1)'),
+            boxShadow: on ? '0 0 20px rgba(255,46,166,.35),inset 0 1px 0 rgba(255,255,255,.2)' : 'inset 0 1px 0 rgba(255,255,255,.07)' },
+          badge: { width:'24px', height:'24px', flex:'0 0 auto', borderRadius:'7px', display:'grid', placeItems:'center',
+            fontFamily:'Anton, sans-serif', fontSize:'13px',
+            background: on ? 'linear-gradient(180deg,#ffd6f1,#ff6ec7)' : 'rgba(255,255,255,.08)',
+            color: on ? '#4a002c' : '#7e8ea8' },
+          titleStyle: { fontFamily:'Anton, sans-serif', fontSize:'15px', letterSpacing:'.04em', lineHeight:1.15,
+            color: on ? '#fff' : '#c8d6e8', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' },
+          artistStyle: { fontSize:'9.5px', letterSpacing:'.06em', color: on ? '#ffd6f1' : '#69788f',
+            whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' },
+          eqStyle: { width:'16px', height:'16px', flex:'0 0 auto', display:'grid', placeItems:'center',
+            fontSize:'10px', color: on ? '#ffd6f1' : '#69788f',
+            animation: playing ? 'glowPulse 1.1s ease-in-out infinite' : 'none' },
+          eqIcon: on ? (playing ? '❚❚' : '▶') : ''
+        };
+      }),
+      musicPowerLabel: s.sound ? 'AN' : 'AUS',
+      musicPowerStyle: { padding:'5px 14px', borderRadius:'9px', fontSize:'11px', fontWeight:700, letterSpacing:'.18em',
+        cursor:'pointer', userSelect:'none',
+        background: s.sound ? 'linear-gradient(180deg,#ffd6f1,#ff6ec7)' : 'rgba(255,255,255,.07)',
+        border:'1px solid '+(s.sound ? 'rgba(255,190,235,.8)' : 'rgba(255,255,255,.14)'),
+        color: s.sound ? '#4a002c' : '#7e8ea8' },
+      volTxt: Math.round(s.vol*100),
+      /* Mischpult-Optik: 15 Balken, Höhe folgt einer Kurve, aktive Balken glühen.
+         Der letzte aktive Balken ist der Griff. */
+      volBars: (()=>{
+        const N = 15, on = s.vol * N, out = [];
+        for (let i = 0; i < N; i++){
+          const t = (i + 1) / N;
+          const h = 26 + Math.pow(t, 0.72) * 74;           // 26–100 %
+          const lit = i < Math.ceil(on);
+          const edge = lit && i === Math.ceil(on) - 1;
+          const hot = t > 0.72;
+          const col = hot ? '#ff4fb4' : '#ff8ade';
+          out.push({ s: {
+            flex:'1 1 0', minWidth:0, height:h+'%', borderRadius:'2px',
+            background: lit
+              ? (edge ? 'linear-gradient(180deg,#fff,'+col+' 55%,#8a0052)'
+                      : 'linear-gradient(180deg,#ffd6f1,'+col+' 62%,#6d0040)')
+              : 'linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05))',
+            boxShadow: lit ? (edge ? '0 0 14px '+col+', 0 0 4px #fff' : '0 0 7px rgba(255,110,199,.55)')
+                           : 'inset 0 0 0 1px rgba(255,255,255,.05)',
+            opacity: s.sound ? 1 : (lit ? .38 : .7),
+            transition:'height .12s linear, box-shadow .12s linear, background .12s linear',
+            pointerEvents:'none'
+          } });
+        }
+        return out;
+      })(),
+      volSeam: { position:'absolute', left:0, right:0, bottom:'-3px', height:'1px',
+        background:'linear-gradient(90deg,transparent,rgba(255,150,225,.5),transparent)', pointerEvents:'none' },
+      volNumStyle: { fontFamily:'Anton, sans-serif', fontSize:'17px', lineHeight:1, minWidth:'34px',
+        textAlign:'right', color: s.sound ? '#ff8ade' : '#5f6f86',
+        textShadow: s.sound ? '0 0 14px rgba(255,110,199,.7)' : 'none' },
+      volRef: (el)=>{ this._volEl = el; },
+      volDown: (e)=>{ this._volDrag = true;
+        if (e.currentTarget.setPointerCapture) e.currentTarget.setPointerCapture(e.pointerId);
+        const r = e.currentTarget.getBoundingClientRect();
+        this.setVol((e.clientX - r.left) / r.width);
+        if (!this.state.sound) this.startMusic(); },
+      volMove: (e)=>{ if (!this._volDrag) return;
+        const r = e.currentTarget.getBoundingClientRect(); this.setVol((e.clientX - r.left) / r.width); },
+      volUp: ()=>{ this._volDrag = false; },
+      volIcon: s.sound ? '❚❚' : '▶',
+      volIconStyle: { width:'30px', height:'30px', flex:'0 0 auto', borderRadius:'9px', display:'grid',
+        placeItems:'center', fontSize:'11px', cursor:'pointer', userSelect:'none',
+        color: s.sound ? '#ffd6f1' : '#8fa3bd',
+        background: s.sound ? 'linear-gradient(180deg,rgba(255,110,199,.32),rgba(74,0,44,.7))' : 'rgba(255,255,255,.07)',
+        border:'1px solid '+(s.sound ? 'rgba(255,150,225,.7)' : 'rgba(255,255,255,.14)'),
+        boxShadow: s.sound ? '0 0 16px rgba(255,46,166,.4)' : 'none' },
+      musicNote: s.soundError ? ('Track lädt nicht: ' + s.soundError) : 'Dauerschleife. Klick auf den laufenden Song pausiert.',
+      musicNoteStyle: { fontSize:'9.5px', lineHeight:1.5, letterSpacing:'.04em',
+        color: s.soundError ? '#ffb3c7' : '#69788f' },
       introOpen: s.introOpen,
       startWithSound: ()=>this.closeIntro(true),
       startMuted: ()=>this.closeIntro(false),
