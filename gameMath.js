@@ -72,9 +72,10 @@ const CLUSTER_BASE = {
   peptid: 0.16793, testo: 0.31471, tanga: 0.67180
 };
 
-function buildPayouts() {
+function buildPayouts(scale) {
+  const s = scale || 1;
   const out = {};
-  for (const id of SYMBOL_IDS) out[id] = payCurve(CLUSTER_BASE[id]);
+  for (const id of SYMBOL_IDS) out[id] = payCurve(CLUSTER_BASE[id] * s);
   return out;
 }
 
@@ -187,21 +188,26 @@ function baseConfig() {
 export const TARGET_MATH = baseConfig();
 
 /* --- DEMO MATH -------------------------------------------------------------
-   Klar gekennzeichnete Vorfuehr-Mathematik: Trigger und Multiplikatoren sind
-   bewusst haeufiger, damit sich alle Features im Stream zeigen lassen.
-   Kalibriert auf ~1/40 Trigger und ~140 % RTP. Das sind AUSDRUECKLICH KEINE
-   Fortune-of-Olympus-Wahrscheinlichkeiten.                                   */
+   Vorfuehr-Mathematik: Features kommen HAEUFIGER (Trigger ~1/46 statt ~1/107,
+   mehr Multiplikatoren), damit sich im Stream alles zeigen laesst. Der RTP ist
+   aber ebenfalls auf 96,55 % kalibriert — die Auszahlungen pro Treffer sind
+   dafuer kleiner. AUSDRUECKLICH KEINE Fortune-of-Olympus-Wahrscheinlichkeiten. */
 export const DEMO_MATH = (() => {
   const m = baseConfig();
   m.id = 'demo';
   m.label = 'DEMO MATH';
   m.isDemo = true;
-  m.rtpTarget = null;
+  m.rtpTarget = 0.9655;
   m.multiplierChance = { base: 0.0058, tumble: 0.0055, freeSpins: 0.0105 };
   m.scatterChance = { base: 0.0205, tumble: 0.0058, freeSpins: 0.0068 };
   m.baseGameScatterChance = 0.0205;
   m.multiplierWeights = [3900, 2700, 1720, 1120, 740, 470, 285, 168, 100, 55, 30, 9, 2.2, 0.4, 0.09];
   m.symbolWeights = { pills: 120, dumbbell: 116, whey: 112, peptid: 100, testo: 86, tanga: 70, a: 106, j: 100, q: 94, k: 86 };
+  /* Demo triggert oefter und wirft mehr Multiplikatoren — damit der RTP trotzdem
+     bei 96,55 % landet, ist die Auszahlungstabelle entsprechend herunterskaliert.
+     Faktor per Monte-Carlo bestimmt. */
+  m.demoPayoutScale = 0.5046;
+  m.clusterPayouts = buildPayouts(m.demoPayoutScale);
   return m;
 })();
 
