@@ -409,25 +409,53 @@ a:hover{color:#ffe9a8}
         </div>
 
         <sc-if value="{{ tabChat }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;align-items:center;gap:8px;padding:6px 11px;border-radius:11px;background:linear-gradient(180deg,rgba(145,70,255,.14),rgba(20,6,44,.5));border:1px solid rgba(169,123,255,.4)">
-            <div style="{{ liveDot }}"></div>
-            <div style="{{ liveStatusStyle }}">{{ liveStatus }}</div>
-          </div>
-          <div style="position:relative;flex:1 1 auto;min-height:min(58vh,520px);overflow:hidden">
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:5px;justify-content:flex-end;overflow:hidden">
-              <sc-for list="{{ chat }}" as="m" hint-placeholder-count="26">
-                <div style="font-size:11.5px;line-height:1.32;animation:tickerSlide .28s ease both;word-break:break-word;flex:0 0 auto">
-                  <span style="{{ m.badgeStyle }}">{{ m.badge }}</span><span style="{{ m.ns }}">{{ m.n }}</span><span style="color:#4d5b70">: </span>
-                  <sc-if value="{{ m.isLink }}" hint-placeholder-val="{{ false }}">
-                    <a href="{{ m.href }}" target="_blank" rel="noopener" style="{{ m.linkStyle }}">{{ m.m }}</a>
-                  </sc-if>
-                  <sc-if value="{{ m.isPlain }}" hint-placeholder-val="{{ true }}">
-                    <span style="{{ m.ms }}">{{ m.m }}</span>
-                  </sc-if>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1 1 auto;min-height:min(58vh,520px)">
+
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0;min-height:0">
+              <div style="display:flex;align-items:center;gap:7px;padding:5px 9px;border-radius:10px;background:linear-gradient(180deg,rgba(145,70,255,.16),rgba(20,6,44,.55));border:1px solid rgba(169,123,255,.42)">
+                <div style="{{ liveDot }}"></div>
+                <div style="{{ liveStatusStyle }}">{{ liveStatus }}</div>
+              </div>
+              <div style="position:relative;flex:1 1 auto;min-height:0;overflow:hidden">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:5px;justify-content:flex-end;overflow:hidden">
+                  <sc-for list="{{ chat }}" as="m" hint-placeholder-count="22">
+                    <div style="font-size:11px;line-height:1.3;animation:tickerSlide .28s ease both;word-break:break-word;flex:0 0 auto">
+                      <span style="{{ m.badgeStyle }}">{{ m.badge }}</span><span style="{{ m.ns }}">{{ m.n }}</span><span style="color:#4d5b70">: </span>
+                      <sc-if value="{{ m.isLink }}" hint-placeholder-val="{{ false }}">
+                        <a href="{{ m.href }}" target="_blank" rel="noopener" style="{{ m.linkStyle }}">{{ m.m }}</a>
+                      </sc-if>
+                      <sc-if value="{{ m.isPlain }}" hint-placeholder-val="{{ true }}">
+                        <span style="{{ m.ms }}">{{ m.m }}</span>
+                      </sc-if>
+                    </div>
+                  </sc-for>
                 </div>
-              </sc-for>
+                <div style="position:absolute;left:0;right:0;top:0;height:34px;background:linear-gradient(180deg,#0c1424,rgba(12,20,36,0));pointer-events:none"></div>
+              </div>
             </div>
-            <div style="position:absolute;left:0;right:0;top:0;height:34px;background:linear-gradient(180deg,#0c1424,rgba(12,20,36,0));pointer-events:none"></div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0;min-height:0;border-left:1px solid rgba(83,252,24,.16);padding-left:8px">
+              <div style="display:flex;align-items:center;gap:7px;padding:5px 9px;border-radius:10px;background:linear-gradient(180deg,rgba(83,252,24,.15),rgba(8,32,2,.55));border:1px solid rgba(83,252,24,.4)">
+                <div style="{{ kickDot }}"></div>
+                <div style="{{ kickStatusStyle }}">{{ kickStatus }}</div>
+              </div>
+              <div style="position:relative;flex:1 1 auto;min-height:0;overflow:hidden">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:5px;justify-content:flex-end;overflow:hidden">
+                  <sc-for list="{{ kickChat }}" as="m" hint-placeholder-count="22">
+                    <div style="font-size:11px;line-height:1.3;animation:tickerSlide .28s ease both;word-break:break-word;flex:0 0 auto">
+                      <span style="{{ m.badgeStyle }}">{{ m.badge }}</span><span style="{{ m.ns }}">{{ m.n }}</span><span style="color:#4d5b70">: </span>
+                      <sc-if value="{{ m.isLink }}" hint-placeholder-val="{{ false }}">
+                        <a href="{{ m.href }}" target="_blank" rel="noopener" style="{{ m.linkStyle }}">{{ m.m }}</a>
+                      </sc-if>
+                      <sc-if value="{{ m.isPlain }}" hint-placeholder-val="{{ true }}">
+                        <span style="{{ m.ms }}">{{ m.m }}</span>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;left:0;right:0;top:0;height:34px;background:linear-gradient(180deg,#0c1424,rgba(12,20,36,0));pointer-events:none"></div>
+              </div>
+            </div>
           </div>
         </sc-if>
 
@@ -568,7 +596,8 @@ class Component extends DCLogic {
     fs:{ active:false, superMode:false, left:0, total:0, mult:0 },
     banner:null, collect:null, overlay:null, multFlash:null, flash:false,
     buyOpen:null, paytableOpen:false,
-    msg:'ENGINE LÄDT…', tab:'chat', chat:[],
+    msg:'ENGINE LÄDT…', tab:'chat', chat:[], kickChat:[],
+    kick:{ on:false, status:'aus' },
     dbg:null, history:[], spinNo:0,
     sim:{ running:false, progress:0, stats:null },
     tests:[], sound:false,
@@ -761,6 +790,7 @@ class Component extends DCLogic {
     this._m = true;
     /* Nur echter Twitch-Chat — keine erfundenen Nachrichten mehr. */
     this.connectTwitch('kubafps');
+    this.connectKick();
     try {
       const [gm, en, cl] = await Promise.all([ import('./gameMath.js'), import('./engine.js'), import('./chatLines.js') ]);
       if (!this._m) return;
@@ -781,6 +811,7 @@ class Component extends DCLogic {
     if (this._fsSfx) this._fsSfx.pause();
     this._twitchWant = false;
     this.closeSocket();
+    this.closeKick();
     if (this.simEngine) this.simEngine.cancel();
   }
 
@@ -847,6 +878,16 @@ class Component extends DCLogic {
     this._spamTimer = null;
     if (this._m && this.state.spamKind) this.setState({ spamKind:null, spamLeft:0 });
   }
+  chatItem(m, subCol){
+    return { n:m.n, m:m.m, k:m.k, href:m.href || '#',
+      isLink: !!m.href, isPlain: !m.href,
+      badge: m.mod ? '⚔ ' : (m.sub ? '★ ' : ''),
+      badgeStyle: m.mod ? { color:'#5fe08a', fontWeight:700 }
+        : m.sub ? { color:subCol, fontWeight:700 } : { display:'none' },
+      ns:{ color:m.c, fontWeight:700 },
+      linkStyle:{ color:'#7fd4ff', fontWeight:700, textDecoration:'underline' },
+      ms:{ color:m.hot ? '#f5c542' : '#b8c8de', fontWeight:m.hot ? 700 : 400 } };
+  }
   pushChat(msg){ this.setState(s=>({ chat:s.chat.concat([msg]).slice(-44) })); }
 
   /* ---------- echter Twitch-Chat -------------------------------------------
@@ -857,6 +898,108 @@ class Component extends DCLogic {
       .replace(/^https?:\/\/(www\.)?twitch\.tv\//,'')
       .replace(/[#@\/\s?].*$/,'');
   }
+  /* ---------- echter Kick-Chat ---------------------------------------------
+     Kick verteilt seinen Chat über Pusher. Der App-Key ist öffentlich, das
+     Mitlesen braucht kein Token — aber die Chatroom-ID ist pro Kanal nötig
+     und nur über die Kick-API zu holen, die kein CORS erlaubt. Deshalb:
+     bekannte ID hart hinterlegt, sonst Auflösung über einen CORS-Proxy.     */
+  KICK_SLUG = 'kubaslots';
+  KICK_CHATROOM_ID = null;
+  KICK_APP_KEY = '32cbd69e4b950bf97679';
+
+  async connectKick(){
+    this._kickWant = true;
+    let id = this.KICK_CHATROOM_ID;
+    if (!id){ try { id = +localStorage.getItem('kuba.kickRoom') || null; } catch(e){} }
+    if (id){
+      this._kickRoom = id;
+      this.setState({ kick:{ on:true, status:'verbinde…' } });
+      this.openKickSocket(id);
+      return;
+    }
+    this.setState({ kick:{ on:true, status:'suche chatroom…' } });
+    for (let attempt = 0; attempt < 4 && this._m && this._kickWant && !id; attempt++){
+      if (attempt) await new Promise(r=>setTimeout(r, 2500));
+      id = await this.resolveKickRoom(this.KICK_SLUG);
+    }
+    if (!this._m || !this._kickWant) return;
+    if (!id){ this.setState({ kick:{ on:true, status:'chatroom nicht erreichbar' } }); return; }
+    try { localStorage.setItem('kuba.kickRoom', String(id)); } catch(e){}
+    this._kickRoom = id;
+    this.openKickSocket(id);
+  }
+  async resolveKickRoom(slug){
+    const api = 'https://kick.com/api/v2/channels/' + slug;
+    const grab = (txt)=>{
+      try { const j = JSON.parse(txt); if (j && j.chatroom && j.chatroom.id) return j.chatroom.id; } catch(e){}
+      const m = String(txt).match(/"chatroom"\s*:\s*\{[^}]*?"id"\s*:\s*(\d+)/);
+      return m ? +m[1] : null;
+    };
+    const proxies = [
+      (u)=>'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u),
+      (u)=>'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+      (u)=>'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
+      (u)=>'https://corsproxy.io/?url=' + encodeURIComponent(u),
+      (u)=>'https://proxy.cors.sh/' + u,
+      (u)=>'https://r.jina.ai/' + u
+    ];
+    for (const p of proxies){
+      if (!this._m || !this._kickWant) return null;
+      try {
+        const r = await fetch(p(api), { cache:'no-store' });
+        if (!r.ok) continue;
+        const id = grab(await r.text());
+        if (id) return id;
+      } catch(e){}
+    }
+    return null;
+  }
+  openKickSocket(room){
+    let ws;
+    const url = 'wss://ws-us2.pusher.com/app/' + this.KICK_APP_KEY +
+      '?protocol=7&client=js&version=8.4.0&flash=false';
+    try { ws = new WebSocket(url); }
+    catch(e){ this.setState({ kick:{ on:true, status:'fehler' } }); return; }
+    this._kws = ws;
+    ws.onopen = ()=>{
+      ws.send(JSON.stringify({ event:'pusher:subscribe', data:{ auth:'', channel:'chatrooms.'+room+'.v2' } }));
+      if (this._m) this.setState({ kick:{ on:true, status:'verbunden' } });
+    };
+    ws.onmessage = (ev)=>{
+      let f; try { f = JSON.parse(ev.data); } catch(e){ return; }
+      if (f.event === 'pusher:ping'){ ws.send(JSON.stringify({ event:'pusher:pong', data:{} })); return; }
+      if (String(f.event).indexOf('ChatMessageEvent') < 0) return;
+      let d; try { d = typeof f.data === 'string' ? JSON.parse(f.data) : f.data; } catch(e){ return; }
+      const snd = d && d.sender;
+      if (!snd) return;
+      const badges = (snd.identity && snd.identity.badges) || [];
+      const has = (t)=>badges.some(b=>b && b.type === t);
+      const text = String(d.content || '').replace(/\[emote:\d+:([^\]]*)\]/g, '$1').trim();
+      if (!text) return;
+      const link = text.match(/https?:\/\/\S+/);
+      if (this._m) this.pushKick({
+        n: snd.username || '???',
+        c: (snd.identity && snd.identity.color) || '#53fc18',
+        m: text, href: link ? link[0] : null,
+        mod: has('moderator'), sub: has('subscriber') || has('founder'),
+        k: ++this._id
+      });
+    };
+    ws.onclose = ()=>{
+      if (!this._m || !this._kickWant) return;
+      this.setState({ kick:{ on:true, status:'neu verbinden…' } });
+      clearTimeout(this._reKws);
+      this._reKws = setTimeout(()=>{ if (this._m && this._kickWant) this.openKickSocket(room); }, 4000);
+    };
+    ws.onerror = ()=>{ if (this._m) this.setState({ kick:{ on:true, status:'fehler' } }); };
+  }
+  pushKick(msg){ this.setState(s=>({ kickChat:s.kickChat.concat([msg]).slice(-44) })); }
+  closeKick(){
+    this._kickWant = false;
+    clearTimeout(this._reKws);
+    if (this._kws){ try { this._kws.onclose = null; this._kws.close(); } catch(e){} this._kws = null; }
+  }
+
   connectTwitch(raw){
     const ch = this.cleanChannel(raw !== undefined ? raw : this.state.chanInput);
     if (!ch){ this.setState({ twitch:{ on:false, channel:'', status:'kanal fehlt' } }); return; }
@@ -1607,14 +1750,17 @@ class Component extends DCLogic {
       overlayEndAmt: s.overlay && s.overlay.type==='end' ? this.money(s.overlay.amount) : '',
       overlayEndSub: s.overlay && s.overlay.type==='end' ? (s.overlay.capped ? 'MAX WIN CAP ERREICHT' : 'GESAMT AUS DER RUNDE') : '',
 
-      chat: s.chat.map(m=>({ n:m.n, m:m.m, k:m.k, href:m.href || '#',
-        isLink: !!m.href, isPlain: !m.href,
-        badge: m.mod ? '⚔ ' : (m.sub ? '★ ' : ''),
-        badgeStyle: m.mod ? { color:'#5fe08a', fontWeight:700 }
-          : m.sub ? { color:'#a97bff', fontWeight:700 } : { display:'none' },
-        ns:{ color:m.c, fontWeight:700 },
-        linkStyle:{ color:'#7fd4ff', fontWeight:700, textDecoration:'underline' },
-        ms:{ color:m.hot ? '#f5c542' : '#b8c8de', fontWeight:m.hot ? 700 : 400 } })),
+      chat: s.chat.map(m=>this.chatItem(m, '#a97bff')),
+      kickChat: s.kickChat.map(m=>this.chatItem(m, '#53fc18')),
+
+      kickDot: { width:'8px', height:'8px', flex:'0 0 auto', borderRadius:'50%',
+        background: s.kick.status === 'verbunden' ? '#53fc18' : s.kick.on ? '#f5c542' : '#4d5b70',
+        boxShadow: s.kick.on ? '0 0 10px currentColor' : 'none',
+        animation: s.kick.status === 'verbunden' ? 'glowPulse 1.5s ease-in-out infinite' : 'none' },
+      kickStatus: s.kick.status === 'verbunden' ? 'LIVE · kubaslots' : 'kick · ' + s.kick.status,
+      kickStatusStyle: { fontSize:'9.5px', fontWeight:700, letterSpacing:'.16em',
+        color: s.kick.status === 'verbunden' ? '#a8ff7a'
+          : (s.kick.status === 'fehler' || s.kick.status === 'chatroom nicht gefunden') ? '#ffb3c7' : '#9bc98a' },
 
       spamOpen: s.spamOpen,
       spamBtnLabel: s.spamKind ? 'SPAM ' + s.spamLeft + 's' : 'SPAM',
