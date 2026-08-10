@@ -159,7 +159,7 @@ a:hover{color:#ffe9a8}
           <div onClick="{{ toggleSound }}" style="{{ musicPowerStyle }}">{{ musicPowerLabel }}</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:7px">
-          <sc-for list="{{ trackOptions }}" as="t" hint-placeholder-count="10">
+          <sc-for list="{{ trackOptions }}" as="t" hint-placeholder-count="5">
             <div onClick="{{ t.click }}" style="{{ t.style }}">
               <div style="{{ t.badge }}">{{ t.num }}</div>
               <div style="flex:1;min-width:0">
@@ -611,18 +611,13 @@ class Component extends DCLogic {
   }
 
   TRACKS = [
-    { src:'audio/kuba-loop.mp3', title:'HUMANS',        artist:'Kardenal & SCARLETT · Hardtechno' },
-    { src:'audio/track2.mp3',    title:'SONNE',         artist:'POLTERGST' },
-    { src:'audio/track3.mp3',    title:'MAYBACH TRUCK', artist:'SHABAB' },
-    { src:'audio/track4.mp3',    title:'SKYFALL',       artist:'Adele' },
+    { src:'audio/track1.mp3',    title:'KUBA KOMMT ZURÜCK', artist:'TTP_Lukas' },
     { src:'audio/track5.mp3',    title:'KUBA HAT SEINE SEELE VERKAUFT', artist:'TTP_Lukas' },
     { src:'audio/track6.mp3',    title:'KUBA',          artist:'TTP_Lukas' },
-    { src:'audio/track7.mp3',    title:'PUSH UP',       artist:'Creeds' },
-    { src:'audio/track8.mp3',    title:'PRADA',         artist:'cassö, RAYE, D-Block Europe' },
     { src:'audio/track9.mp3',    title:'BARBAROSSA',    artist:'TTP_Lukas' },
     { src:'audio/track10.mp3',   title:'KUBA & SEINE GROSSE LIEBE', artist:'TTP_Lukas' }
   ];
-  MUSIC_SRC = 'audio/kuba-loop.mp3';
+  MUSIC_SRC = 'audio/track1.mp3';
   MUSIC_VOL = 0.32;
   BOOM_SRC = 'audio/boom.mp3';
   FS_SRC = 'audio/freespins.mp3';
