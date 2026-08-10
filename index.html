@@ -45,6 +45,11 @@ a:hover{color:#ffe9a8}
 @keyframes dustUp{0%{transform:translateY(0) scale(.5);opacity:0}14%{opacity:.85}100%{transform:translateY(-115vh) scale(1.15);opacity:0}}
 @keyframes sweep{0%{transform:translateX(-160%) skewX(-16deg)}55%,100%{transform:translateX(360%) skewX(-16deg)}}
 @keyframes platePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes bulbChase{0%,100%{opacity:.28;transform:scale(.82)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes railSweep{0%{transform:translateX(-120%)}100%{transform:translateX(420%)}}
+@keyframes neonBreathe{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes crownSpin{to{transform:rotate(360deg)}}
+@keyframes scanDrift{0%{transform:translateY(0)}100%{transform:translateY(6px)}}
 </style>
 </helmet>
 
@@ -62,9 +67,32 @@ a:hover{color:#ffe9a8}
   <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;padding:12px 18px 16px;min-height:100vh">
 
     <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-      <div style="display:flex;flex-direction:column;gap:1px">
-        <div style="font-family:Anton,sans-serif;font-size:clamp(26px,3vw,42px);line-height:.92;letter-spacing:.02em;background:linear-gradient(178deg,#fffdf2 4%,#ffe9a8 30%,#f5c542 56%,#8a5f00 98%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 3px 16px rgba(245,197,66,.5))">KUBA&rsquo;S GAINZ LAB</div>
-        <div style="font-size:9px;font-weight:700;letter-spacing:.4em;color:#8fa3bd">ALL GAINS &middot; NO BRAKES</div>
+      <div style="position:relative;padding:9px 26px 10px;border-radius:6px 6px 16px 16px;background:linear-gradient(180deg,#2a2415 0%,#12141f 42%,#05080f 100%);border:1px solid rgba(245,197,66,.5);box-shadow:0 0 0 1px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,233,168,.35),inset 0 -14px 26px rgba(0,0,0,.75),0 12px 34px rgba(0,0,0,.75),0 0 46px rgba(245,197,66,.16);overflow:hidden">
+        <div style="position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,#ffe9a8,#fff,#ffe9a8,transparent)"></div>
+        <div style="position:absolute;left:0;top:0;width:34%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.13),transparent);animation:railSweep 6.5s ease-in-out infinite;pointer-events:none"></div>
+        <div style="position:absolute;left:8px;right:8px;bottom:3px;display:flex;justify-content:space-between;pointer-events:none">
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:0s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:.18s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:.36s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:.54s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:.72s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:.9s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:1.08s"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 7px #f5c542;animation:bulbChase 1.5s ease-in-out infinite;animation-delay:1.26s"></div>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <div style="width:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,66,.85))"></div>
+            <div style="font-size:8px;font-weight:700;letter-spacing:.46em;color:#c9a94a">EST. 2026</div>
+            <div style="width:16px;height:1px;background:linear-gradient(90deg,rgba(245,197,66,.85),transparent)"></div>
+          </div>
+          <div style="position:relative;font-family:Anton,sans-serif;font-size:clamp(26px,3vw,44px);line-height:.9;letter-spacing:.03em;background:linear-gradient(178deg,#fffdf2 3%,#fff6cf 22%,#f5c542 52%,#c48f0c 74%,#6d4800 99%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.55)) drop-shadow(0 4px 22px rgba(245,197,66,.6))">KUBA&rsquo;S GAINZ LAB</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:4px;height:4px;border-radius:50%;background:#ff2ea6;box-shadow:0 0 8px #ff2ea6"></div>
+            <div style="font-size:8.5px;font-weight:700;letter-spacing:.4em;color:#9db0c9">ALL GAINS &middot; NO BRAKES</div>
+            <div style="width:4px;height:4px;border-radius:50%;background:#35b6ff;box-shadow:0 0 8px #35b6ff"></div>
+          </div>
+        </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:8px;padding:6px 12px 6px 8px;border-radius:11px;background:linear-gradient(180deg,#1a2338,#080d17);border:1px solid rgba(245,197,66,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 18px rgba(0,0,0,.6)">
@@ -93,7 +121,7 @@ a:hover{color:#ffe9a8}
     <div style="display:flex;gap:14px;align-items:stretch;justify-content:center;flex-wrap:wrap;flex:1;min-height:0">
 
       <div style="flex:1 1 300px;max-width:360px;min-width:256px;order:1;display:flex;flex-direction:column;gap:11px;padding:16px 15px;border-radius:16px;background:linear-gradient(180deg,rgba(3,8,18,.56),rgba(1,3,9,.7));border:1px solid rgba(245,197,66,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.65)">
-        <a href="https://kubabonus.com/" target="_blank" rel="noopener" style="display:block;padding:12px 13px;border-radius:13px;text-decoration:none;background:linear-gradient(180deg,#ffe9a8,#e0ab18 55%,#a06f00);border:1px solid rgba(255,255,255,.55);box-shadow:0 10px 26px rgba(245,197,66,.32),inset 0 1px 0 rgba(255,255,255,.6);animation:platePulse 2.6s ease-in-out infinite" style-hover="filter:brightness(1.1)">
+        <a href="https://kubabonus.com/" target="_blank" rel="noopener" style="display:block;padding:12px 13px;border-radius:13px;text-decoration:none;background:linear-gradient(180deg,#ffe9a8,#e0ab18 55%,#a06f00);border:1px solid rgba(255,255,255,.55);box-shadow:0 10px 26px rgba(245,197,66,.32),inset 0 1px 0 rgba(255,255,255,.6);animation:platePulse 2.6s ease-in-out infinite;transition:filter .16s ease,box-shadow .18s ease" style-hover="filter:brightness(1.16) saturate(1.1);box-shadow:0 14px 34px rgba(245,197,66,.55),0 0 40px rgba(245,197,66,.45),inset 0 1px 0 rgba(255,255,255,.75)">
           <div style="font-family:Anton,sans-serif;font-size:15px;line-height:1.12;letter-spacing:.03em;color:#2a1c00">HIER KOMMST DU ZUM BESTEN BONUS</div>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
             <span style="font-size:9px;font-weight:700;letter-spacing:.2em;color:#5a3f00">KUBABONUS.COM</span>
@@ -103,7 +131,7 @@ a:hover{color:#ffe9a8}
         <div style="font-family:Anton,sans-serif;font-size:12px;letter-spacing:.24em;color:#f5c542">ANTE BET</div>
         <div style="display:flex;gap:5px">
           <sc-for list="{{ anteOptions }}" as="a" hint-placeholder-count="3">
-            <div onClick="{{ a.click }}" style="{{ a.style }}">
+            <div onClick="{{ a.click }}" style="{{ a.style }}" style-hover="transform:translateY(-2px);border-color:rgba(255,233,168,.95);box-shadow:0 0 0 1px rgba(245,197,66,.35),0 10px 22px rgba(0,0,0,.7),0 0 26px rgba(245,197,66,.4);filter:brightness(1.12)" style-active="transform:translateY(0) scale(.96)">
               <div style="font-family:Anton,sans-serif;font-size:14px;line-height:1.15;letter-spacing:.03em">{{ a.label }}</div>
               <div style="{{ a.sub }}">{{ a.cost }}</div>
             </div>
@@ -113,14 +141,14 @@ a:hover{color:#ffe9a8}
 
         <div style="height:1px;background:linear-gradient(90deg,rgba(245,197,66,.45),transparent);margin:3px 0"></div>
         <div style="font-family:Anton,sans-serif;font-size:12px;letter-spacing:.24em;color:#35b6ff">SUPER SPINS</div>
-        <div onClick="{{ superSpin1 }}" style="{{ ss1Style }}">
+        <div onClick="{{ superSpin1 }}" style="{{ ss1Style }}" style-hover="transform:translateX(4px);border-color:rgba(120,215,255,.95);background:linear-gradient(180deg,rgba(53,182,255,.3),rgba(6,34,58,.85));box-shadow:0 0 0 1px rgba(53,182,255,.3),0 10px 24px rgba(0,0,0,.7),0 0 28px rgba(53,182,255,.4),inset 0 1px 0 rgba(255,255,255,.22)" style-active="transform:translateX(4px) scale(.985)">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <span style="font-family:Anton,sans-serif;font-size:13px">SUPER SPIN 1</span>
             <span style="font-family:Anton,sans-serif;font-size:13px;color:#f5c542">{{ ss1Cost }}</span>
           </div>
           <div style="font-size:8.5px;color:#8fa3bd;letter-spacing:.05em">1 garantierter Multiplikator &middot; mehr Bildsymbole</div>
         </div>
-        <div onClick="{{ superSpin2 }}" style="{{ ss2Style }}">
+        <div onClick="{{ superSpin2 }}" style="{{ ss2Style }}" style-hover="transform:translateX(4px);border-color:rgba(120,215,255,.95);background:linear-gradient(180deg,rgba(53,182,255,.3),rgba(6,34,58,.85));box-shadow:0 0 0 1px rgba(53,182,255,.3),0 10px 24px rgba(0,0,0,.7),0 0 28px rgba(53,182,255,.4),inset 0 1px 0 rgba(255,255,255,.22)" style-active="transform:translateX(4px) scale(.985)">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <span style="font-family:Anton,sans-serif;font-size:13px">SUPER SPIN 2</span>
             <span style="font-family:Anton,sans-serif;font-size:13px;color:#f5c542">{{ ss2Cost }}</span>
@@ -130,14 +158,14 @@ a:hover{color:#ffe9a8}
 
         <div style="height:1px;background:linear-gradient(90deg,rgba(255,46,166,.45),transparent);margin:3px 0"></div>
         <div style="font-family:Anton,sans-serif;font-size:12px;letter-spacing:.24em;color:#ff6cc0">FEATURE KAUFEN</div>
-        <div onClick="{{ openBuy }}" style="{{ buyStyle }}">
+        <div onClick="{{ openBuy }}" style="{{ buyStyle }}" style-hover="transform:translateX(4px);border-color:rgba(255,190,235,.95);box-shadow:0 0 0 1px rgba(255,150,225,.32),0 10px 24px rgba(0,0,0,.7),0 0 30px rgba(255,46,166,.45),inset 0 1px 0 rgba(255,255,255,.24);filter:brightness(1.12)" style-active="transform:translateX(4px) scale(.985)">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <span style="font-family:Anton,sans-serif;font-size:13px">FREE SPINS</span>
             <span style="font-family:Anton,sans-serif;font-size:13px;color:#ffe9a8">{{ buyCost }}</span>
           </div>
           <div style="font-size:8.5px;color:#ffc9ec;letter-spacing:.05em">100&times; Einsatz</div>
         </div>
-        <div onClick="{{ openSuperBuy }}" style="{{ superBuyStyle }}">
+        <div onClick="{{ openSuperBuy }}" style="{{ superBuyStyle }}" style-hover="transform:translateX(4px);border-color:rgba(255,214,241,.98);box-shadow:0 0 0 1px rgba(255,150,225,.4),0 10px 24px rgba(0,0,0,.7),0 0 34px rgba(255,46,166,.55),inset 0 1px 0 rgba(255,255,255,.28);filter:brightness(1.14)" style-active="transform:translateX(4px) scale(.985)">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <span style="font-family:Anton,sans-serif;font-size:13px">SUPER FREE SPINS</span>
             <span style="font-family:Anton,sans-serif;font-size:13px;color:#ffe9a8">{{ superBuyCost }}</span>
@@ -150,28 +178,28 @@ a:hover{color:#ffe9a8}
           <img src="symbols/kollege.png" alt="" style="{{ idleStyle }}">
           <img src="symbols/kollege-flame.png" alt="" style="{{ flameStyle }}">
         </div>
-        <div onClick="{{ openPaytable }}" style="padding:9px;border-radius:11px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.18em;background:linear-gradient(180deg,#1d283f,#0b1220);border:1px solid rgba(245,197,66,.32);cursor:pointer;user-select:none;color:#e5d5a8" style-hover="border-color:rgba(245,197,66,.8)">PAYTABLE &amp; REGELN</div>
+        <div onClick="{{ openPaytable }}" style="padding:9px;border-radius:11px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.18em;background:linear-gradient(180deg,#1d283f,#0b1220);border:1px solid rgba(245,197,66,.32);cursor:pointer;user-select:none;color:#e5d5a8;transition:transform .16s cubic-bezier(.2,1.3,.4,1),box-shadow .18s ease,border-color .18s ease,color .18s ease" style-hover="border-color:rgba(255,233,168,.9);color:#fff6cf;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.65),0 0 24px rgba(245,197,66,.35)" style-active="transform:translateY(0) scale(.97)">PAYTABLE &amp; REGELN</div>
       </div>
 
       <div style="flex:0 0 auto;width:clamp(252px,20vw,330px);order:1;display:flex;flex-direction:column;gap:11px;padding:17px 16px 15px;border-radius:16px;background:linear-gradient(180deg,rgba(3,8,18,.56),rgba(1,3,9,.7));border:1px solid rgba(255,46,166,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.65)">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
           <div style="font-family:Anton,sans-serif;font-size:14px;letter-spacing:.24em;color:#ff8ade">MUSIK</div>
-          <div onClick="{{ toggleSound }}" style="{{ musicPowerStyle }}">{{ musicPowerLabel }}</div>
+          <div onClick="{{ toggleSound }}" style="{{ musicPowerStyle }}" style-hover="filter:brightness(1.18);box-shadow:0 0 20px rgba(255,46,166,.55);transform:translateY(-1px)" style-active="transform:translateY(0) scale(.95)">{{ musicPowerLabel }}</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:7px">
           <sc-for list="{{ trackOptions }}" as="t" hint-placeholder-count="5">
-            <div onClick="{{ t.click }}" style="{{ t.style }}">
-              <div style="{{ t.badge }}">{{ t.num }}</div>
+            <div onClick="{{ t.click }}" style="{{ t.style }}" style-hover="transform:translateX(4px);border-color:rgba(255,150,225,.9);background:linear-gradient(180deg,rgba(255,110,199,.3),rgba(46,4,30,.85));box-shadow:0 0 0 1px rgba(255,150,225,.3),0 10px 24px rgba(0,0,0,.7),0 0 30px rgba(255,46,166,.32),inset 0 1px 0 rgba(255,255,255,.24)" style-active="transform:translateX(4px) scale(.985)">
+              <div style="{{ t.badge }}" style-hover="transform:scale(1.14) rotate(-5deg);background:linear-gradient(180deg,#fff,#ff6ec7);color:#4a002c;box-shadow:0 0 16px rgba(255,46,166,.7)">{{ t.num }}</div>
               <div style="flex:1;min-width:0">
-                <div style="{{ t.titleStyle }}">{{ t.title }}</div>
-                <div style="{{ t.artistStyle }}">{{ t.artist }}</div>
+                <div style="{{ t.titleStyle }}" style-hover="color:#fff;text-shadow:0 0 16px rgba(255,110,199,.85)">{{ t.title }}</div>
+                <div style="{{ t.artistStyle }}" style-hover="color:#ffd6f1">{{ t.artist }}</div>
               </div>
-              <div style="{{ t.eqStyle }}">{{ t.eqIcon }}</div>
+              <div style="{{ t.eqStyle }}" style-hover="color:#fff;transform:scale(1.25)">{{ t.eqIcon }}</div>
             </div>
           </sc-for>
         </div>
         <div style="display:flex;align-items:flex-end;gap:10px">
-          <div onClick="{{ toggleSound }}" style="{{ volIconStyle }}">{{ volIcon }}</div>
+          <div onClick="{{ toggleSound }}" style="{{ volIconStyle }}" style-hover="border-color:rgba(255,190,235,.95);color:#fff;box-shadow:0 0 20px rgba(255,46,166,.6);transform:scale(1.08)" style-active="transform:scale(.94)">{{ volIcon }}</div>
           <div ref="{{ volRef }}" onPointerDown="{{ volDown }}" onPointerMove="{{ volMove }}" onPointerUp="{{ volUp }}" onPointerCancel="{{ volUp }}" style="position:relative;flex:1;height:38px;display:flex;align-items:flex-end;gap:2px;cursor:ew-resize;touch-action:none">
             <sc-for list="{{ volBars }}" as="b" hint-placeholder-count="15">
               <div style="{{ b.s }}"></div>
@@ -201,10 +229,10 @@ a:hover{color:#ffe9a8}
           </div>
 
           <div style="display:flex;align-items:center;gap:6px;margin-top:7px">
-            <div onClick="{{ seekBack }}" style="{{ seekBtn }}">&#9664;&#9664; 10</div>
-            <div onClick="{{ toggleSound }}" style="{{ seekPlayBtn }}">{{ volIcon }}</div>
-            <div onClick="{{ seekFwd }}" style="{{ seekBtn }}">10 &#9654;&#9654;</div>
-            <div onClick="{{ nextTrack }}" style="{{ seekBtn }}">&#9654;&#9654;|</div>
+            <div onClick="{{ seekBack }}" style="{{ seekBtn }}" style-hover="border-color:rgba(245,197,66,.85);color:#ffe9a8;box-shadow:0 0 16px rgba(245,197,66,.35);transform:translateY(-1px)" style-active="transform:translateY(0) scale(.94)">&#9664;&#9664; 10</div>
+            <div onClick="{{ toggleSound }}" style="{{ seekPlayBtn }}" style-hover="border-color:rgba(255,190,235,.95);color:#fff;box-shadow:0 0 18px rgba(255,46,166,.6);transform:scale(1.08)" style-active="transform:scale(.94)">{{ volIcon }}</div>
+            <div onClick="{{ seekFwd }}" style="{{ seekBtn }}" style-hover="border-color:rgba(245,197,66,.85);color:#ffe9a8;box-shadow:0 0 16px rgba(245,197,66,.35);transform:translateY(-1px)" style-active="transform:translateY(0) scale(.94)">10 &#9654;&#9654;</div>
+            <div onClick="{{ nextTrack }}" style="{{ seekBtn }}" style-hover="border-color:rgba(245,197,66,.85);color:#ffe9a8;box-shadow:0 0 16px rgba(245,197,66,.35);transform:translateY(-1px)" style-active="transform:translateY(0) scale(.94)">&#9654;&#9654;|</div>
             <div style="{{ seekLoopStyle }}">LOOP</div>
           </div>
         </div>
@@ -213,9 +241,10 @@ a:hover{color:#ffe9a8}
       <div style="display:flex;flex-direction:column;align-items:center;gap:9px;flex:1 1 600px;min-width:min(100%,580px);max-width:860px;order:2">
 
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center">
-          <div style="display:flex;align-items:center;gap:9px;padding:5px 18px;border-radius:999px;background:linear-gradient(180deg,#1c2740,#080d17);border:1px solid rgba(245,197,66,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)">
+          <div style="position:relative;display:flex;align-items:center;gap:10px;padding:6px 20px;border-radius:10px;background:linear-gradient(180deg,#0a0f1a,#04070e);border:1px solid rgba(245,197,66,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 24px rgba(0,0,0,.9),0 6px 20px rgba(0,0,0,.6);overflow:hidden">
+            <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.55) 0 1px,transparent 1px 3px);pointer-events:none"></div>
             <div style="{{ statusDot }}"></div>
-            <div style="font-family:Anton,sans-serif;font-size:14px;letter-spacing:.1em;color:#f0e4c4">{{ statusMsg }}</div>
+            <div style="{{ statusTextStyle }}">{{ statusMsg }}</div>
           </div>
           <sc-if value="{{ fsActive }}" hint-placeholder-val="{{ false }}">
             <div style="{{ globalPlate }}">
@@ -234,13 +263,21 @@ a:hover{color:#ffe9a8}
           </sc-if>
         </div>
 
-        <div style="position:relative;max-width:100%;padding:16px;border-radius:24px;background:linear-gradient(180deg,#39331d 0%,#171a26 12%,#080c15 40%,#05080f 100%);border:2px solid #7d6220;box-shadow:0 0 0 1px rgba(255,233,168,.28) inset,0 0 74px rgba(53,182,255,.18),0 30px 70px rgba(0,0,0,.85),inset 0 0 70px rgba(0,0,0,.9);overflow:hidden">
-          <div style="position:absolute;left:10px;top:10px;width:10px;height:10px;border-radius:2px;transform:rotate(45deg);background:linear-gradient(180deg,#ffe9a8,#8a6a1c)"></div>
-          <div style="position:absolute;right:10px;top:10px;width:10px;height:10px;border-radius:2px;transform:rotate(45deg);background:linear-gradient(180deg,#ffe9a8,#8a6a1c)"></div>
-          <div style="position:absolute;left:10px;bottom:10px;width:10px;height:10px;border-radius:2px;transform:rotate(45deg);background:linear-gradient(180deg,#ffe9a8,#8a6a1c)"></div>
-          <div style="position:absolute;right:10px;bottom:10px;width:10px;height:10px;border-radius:2px;transform:rotate(45deg);background:linear-gradient(180deg,#ffe9a8,#8a6a1c)"></div>
+        <div style="position:relative;max-width:100%;padding:19px;border-radius:26px;background:linear-gradient(180deg,#4a3f22 0%,#2a2716 5%,#171a26 16%,#080c15 44%,#04070e 100%);border:2px solid #8a6c22;box-shadow:0 0 0 1px rgba(255,233,168,.34) inset,0 0 0 5px rgba(4,7,14,.9),0 0 0 6px rgba(245,197,66,.22),0 0 92px rgba(53,182,255,.2),0 34px 80px rgba(0,0,0,.9),inset 0 0 78px rgba(0,0,0,.92);overflow:hidden">
+          <div style="position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,rgba(138,108,34,0),#ffe9a8 18%,#fff 50%,#ffe9a8 82%,rgba(138,108,34,0))"></div>
+          <div style="position:absolute;left:0;top:0;width:26%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.06),transparent);animation:railSweep 9s ease-in-out infinite;pointer-events:none"></div>
+          <div style="position:absolute;inset:13px;border-radius:16px;border:1px solid rgba(53,182,255,.3);box-shadow:0 0 22px rgba(53,182,255,.28),inset 0 0 22px rgba(53,182,255,.14);animation:neonBreathe 3.4s ease-in-out infinite;pointer-events:none"></div>
+          <div style="position:absolute;left:22px;right:22px;top:5px;display:flex;justify-content:space-between;pointer-events:none;z-index:3">
+            <sc-for list="{{ marquee }}" as="b" hint-placeholder-count="14">
+              <div style="{{ b.s }}"></div>
+            </sc-for>
+          </div>
+          <div style="position:absolute;left:8px;top:8px;width:12px;height:12px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(150deg,#fff8dd,#f5c542 45%,#6d4800);box-shadow:0 0 10px rgba(245,197,66,.6),inset 0 1px 0 rgba(255,255,255,.8)"></div>
+          <div style="position:absolute;right:8px;top:8px;width:12px;height:12px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(150deg,#fff8dd,#f5c542 45%,#6d4800);box-shadow:0 0 10px rgba(245,197,66,.6),inset 0 1px 0 rgba(255,255,255,.8)"></div>
+          <div style="position:absolute;left:8px;bottom:8px;width:12px;height:12px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(150deg,#fff8dd,#f5c542 45%,#6d4800);box-shadow:0 0 10px rgba(245,197,66,.6),inset 0 1px 0 rgba(255,255,255,.8)"></div>
+          <div style="position:absolute;right:8px;bottom:8px;width:12px;height:12px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(150deg,#fff8dd,#f5c542 45%,#6d4800);box-shadow:0 0 10px rgba(245,197,66,.6),inset 0 1px 0 rgba(255,255,255,.8)"></div>
 
-          <div style="position:relative;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:4px;height:min(66vh,760px);aspect-ratio:1/1;border-radius:14px;background:radial-gradient(92% 82% at 50% 38%,rgba(53,182,255,.09),rgba(0,0,0,.62) 72%);padding:6px;box-shadow:inset 0 0 40px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,233,168,.12)">
+          <div style="position:relative;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:4px;height:min(66vh,760px);aspect-ratio:1/1;border-radius:14px;background:radial-gradient(92% 82% at 50% 34%,rgba(53,182,255,.13),rgba(2,6,14,.7) 68%),repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 4px);padding:7px;box-shadow:inset 0 0 46px rgba(0,0,0,.94),inset 0 0 0 1px rgba(255,233,168,.16),inset 0 2px 0 rgba(0,0,0,.8)">
             <sc-for list="{{ cells }}" as="c" hint-placeholder-count="49">
               <div style="{{ c.cell }}">
                 <div style="{{ c.anim }}">
@@ -323,28 +360,42 @@ a:hover{color:#ffe9a8}
           </sc-if>
         </div>
 
-        <div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:11px;padding:11px 16px;border-radius:16px;background:linear-gradient(180deg,#1a2338 0%,#0b1120 40%,#05080f 100%);border:1px solid rgba(245,197,66,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 18px 40px rgba(0,0,0,.7)">
-          <div style="min-width:0;flex:1 1 96px">
+        <div style="position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;padding:13px 18px;border-radius:16px;background:linear-gradient(180deg,#2b3550 0%,#1a2338 8%,#0b1120 44%,#05080f 100%),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px);border:1px solid rgba(245,197,66,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -18px 30px rgba(0,0,0,.6),0 20px 44px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.6)">
+          <div style="position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,233,168,.7),transparent);pointer-events:none"></div>
+          <div style="position:absolute;left:7px;top:7px;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#8fa3bd 55%,#2a3348);pointer-events:none"></div>
+          <div style="position:absolute;right:7px;top:7px;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#8fa3bd 55%,#2a3348);pointer-events:none"></div>
+          <div style="position:absolute;left:7px;bottom:7px;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#8fa3bd 55%,#2a3348);pointer-events:none"></div>
+          <div style="position:absolute;right:7px;bottom:7px;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#8fa3bd 55%,#2a3348);pointer-events:none"></div>
+          <div style="position:relative;display:flex;align-items:center;gap:13px;min-width:0">
+          <div style="{{ readoutBox }}">
             <div style="font-size:8.5px;font-weight:700;letter-spacing:.28em;color:#7e8ea8">GUTHABEN</div>
-            <div style="font-family:Anton,sans-serif;font-size:clamp(16px,1.7vw,25px);line-height:1.1;color:#f2f7ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ balanceTxt }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:clamp(16px,1.7vw,25px);line-height:1.1;color:#f2f7ff;text-shadow:0 0 14px rgba(210,232,255,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ balanceTxt }}</div>
           </div>
           <div style="display:flex;align-items:center;gap:7px;flex:0 0 auto">
-            <div onClick="{{ betDown }}" style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(180deg,#26314a,#0d1322);border:1px solid rgba(245,197,66,.3);font-family:Anton,sans-serif;font-size:18px;color:#f5c542;cursor:pointer;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)" style-hover="border-color:#f5c542">&minus;</div>
+            <div onClick="{{ betDown }}" style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(180deg,#26314a,#0d1322);border:1px solid rgba(245,197,66,.3);font-family:Anton,sans-serif;font-size:18px;color:#f5c542;cursor:pointer;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.16);transition:transform .14s cubic-bezier(.2,1.4,.4,1),box-shadow .18s ease,border-color .18s ease,color .18s ease" style-hover="border-color:#ffe9a8;color:#fff6cf;transform:scale(1.12);box-shadow:0 0 18px rgba(245,197,66,.5),inset 0 1px 0 rgba(255,255,255,.3)" style-active="transform:scale(.92)">&minus;</div>
             <div style="text-align:center;min-width:100px">
               <div style="{{ betCaptionStyle }}">{{ betCaption }}</div>
               <div style="{{ betAmountStyle }}">{{ betTxt }}</div>
             </div>
-            <div onClick="{{ betUp }}" style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(180deg,#26314a,#0d1322);border:1px solid rgba(245,197,66,.3);font-family:Anton,sans-serif;font-size:18px;color:#f5c542;cursor:pointer;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)" style-hover="border-color:#f5c542">+</div>
+            <div onClick="{{ betUp }}" style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(180deg,#26314a,#0d1322);border:1px solid rgba(245,197,66,.3);font-family:Anton,sans-serif;font-size:18px;color:#f5c542;cursor:pointer;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.16);transition:transform .14s cubic-bezier(.2,1.4,.4,1),box-shadow .18s ease,border-color .18s ease,color .18s ease" style-hover="border-color:#ffe9a8;color:#fff6cf;transform:scale(1.12);box-shadow:0 0 18px rgba(245,197,66,.5),inset 0 1px 0 rgba(255,255,255,.3)" style-active="transform:scale(.92)">+</div>
           </div>
+          </div>
+
           <div onClick="{{ onSpin }}" style="{{ spinWrap }}">
+            <div style="{{ spinHalo }}"></div>
+            <div style="{{ spinBezel }}"></div>
             <div style="{{ spinRing }}"></div>
             <div style="{{ spinFace }}">
-              <div style="font-family:Anton,sans-serif;font-size:20px;letter-spacing:.04em;color:#2a1c00;text-shadow:0 1px 0 rgba(255,255,255,.5)">{{ spinLabel }}</div>
+              <div style="{{ spinGloss }}"></div>
+              <div style="{{ spinLabelStyle }}">{{ spinLabel }}</div>
+              <div style="{{ spinSubStyle }}">{{ spinSub }}</div>
             </div>
           </div>
+
+          <div style="position:relative;display:flex;align-items:center;justify-content:flex-end;gap:13px;min-width:0">
           <div style="position:relative;display:flex;flex-direction:column;gap:5px;flex:0 0 auto;width:108px">
-            <div onClick="{{ cycleAuto }}" style="{{ autoStyle }}">{{ autoLabel }}</div>
-            <div onClick="{{ toggleTurbo }}" style="{{ turboStyle }}">TURBO</div>
+            <div onClick="{{ cycleAuto }}" style="{{ autoStyle }}" style-hover="border-color:rgba(255,190,235,.9);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.65),0 0 24px rgba(255,46,166,.4)" style-active="transform:translateY(0) scale(.96)">{{ autoLabel }}</div>
+            <div onClick="{{ toggleTurbo }}" style="{{ turboStyle }}" style-hover="border-color:rgba(255,233,168,.95);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.65),0 0 24px rgba(245,197,66,.45);filter:brightness(1.12)" style-active="transform:translateY(0) scale(.96)">TURBO</div>
 
             <sc-if value="{{ autoOpen }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute;bottom:calc(100% + 10px);right:-6px;width:268px;z-index:30;padding:15px 16px 14px;border-radius:16px;background:linear-gradient(180deg,#1b263d,#070c16);border:1px solid rgba(245,197,66,.45);box-shadow:0 22px 50px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.16),0 0 34px rgba(245,197,66,.16)">
@@ -386,9 +437,10 @@ a:hover{color:#ffe9a8}
               </div>
             </sc-if>
           </div>
-          <div style="min-width:0;flex:1 1 96px;text-align:right">
+          <div style="{{ readoutWinBox }}">
             <div style="font-size:8.5px;font-weight:700;letter-spacing:.28em;color:#7e8ea8">GEWINN</div>
-            <div style="font-family:Anton,sans-serif;font-size:clamp(16px,1.7vw,25px);line-height:1.1;color:#f5c542;text-shadow:0 0 18px rgba(245,197,66,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ winTxt }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:clamp(16px,1.7vw,25px);line-height:1.1;color:#f5c542;text-shadow:0 0 20px rgba(245,197,66,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ winTxt }}</div>
+          </div>
           </div>
         </div>
 
@@ -413,9 +465,9 @@ a:hover{color:#ffe9a8}
       <div style="flex:1 1 380px;max-width:440px;min-width:290px;order:3;display:flex;flex-direction:column;gap:9px;padding:15px 13px;border-radius:16px;background:linear-gradient(180deg,rgba(3,8,18,.56),rgba(1,3,9,.7));border:1px solid rgba(53,182,255,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.65);min-height:0">
         <div style="position:relative;display:flex;gap:4px;align-items:stretch">
           <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
-            <div onClick="{{ t.click }}" style="{{ t.style }}">{{ t.label }}</div>
+            <div onClick="{{ t.click }}" style="{{ t.style }}" style-hover="border-color:rgba(120,215,255,.85);color:#dff2ff;transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 20px rgba(53,182,255,.4)" style-active="transform:translateY(0) scale(.95)">{{ t.label }}</div>
           </sc-for>
-          <div onClick="{{ toggleSpam }}" style="{{ spamBtnStyle }}">{{ spamBtnLabel }}</div>
+          <div onClick="{{ toggleSpam }}" style="{{ spamBtnStyle }}" style-hover="border-color:rgba(255,233,168,.95);color:#fff6cf;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.65),0 0 26px rgba(245,197,66,.5);filter:brightness(1.14)" style-active="transform:translateY(0) scale(.94)">{{ spamBtnLabel }}</div>
 
           <sc-if value="{{ spamOpen }}" hint-placeholder-val="{{ false }}">
             <div style="position:absolute;top:calc(100% + 8px);right:0;width:250px;z-index:32;padding:14px 14px 13px;border-radius:15px;background:linear-gradient(180deg,#1b263d,#070c16);border:1px solid rgba(245,197,66,.5);box-shadow:0 22px 50px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.16),0 0 34px rgba(245,197,66,.2)">
@@ -423,10 +475,10 @@ a:hover{color:#ffe9a8}
               <div style="font-size:9px;line-height:1.45;color:#7e8ea8;margin-bottom:10px">30 Sekunden Dauerfeuer im Chat.</div>
               <div style="display:flex;flex-direction:column;gap:6px">
                 <sc-for list="{{ spamOptions }}" as="o" hint-placeholder-count="3">
-                  <div onClick="{{ o.click }}" style="{{ o.style }}">{{ o.label }}</div>
+                  <div onClick="{{ o.click }}" style="{{ o.style }}" style-hover="transform:translateX(3px);border-color:rgba(255,233,168,.9);color:#fff6cf;box-shadow:0 8px 20px rgba(0,0,0,.6),0 0 24px rgba(245,197,66,.4)" style-active="transform:translateX(3px) scale(.98)">{{ o.label }}</div>
                 </sc-for>
               </div>
-              <div onClick="{{ closeSpam }}" style="margin-top:10px;padding:8px;border-radius:10px;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.16em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#9fb4ce;cursor:pointer;user-select:none" style-hover="background:rgba(255,255,255,.14)">ABBRECHEN</div>
+              <div onClick="{{ closeSpam }}" style="margin-top:10px;padding:8px;border-radius:10px;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.16em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#9fb4ce;cursor:pointer;user-select:none;transition:background .18s ease,color .18s ease,border-color .18s ease" style-hover="background:rgba(255,255,255,.16);color:#e6eefb;border-color:rgba(255,255,255,.3)">ABBRECHEN</div>
             </div>
           </sc-if>
         </div>
@@ -501,7 +553,7 @@ a:hover{color:#ffe9a8}
             <div style="font-size:9px;line-height:1.45;color:#69788f">Headless-Simulation der aktiven Mathematik. Kein UI, kein Guthaben — nur Engine.</div>
             <div style="display:flex;gap:5px">
               <sc-for list="{{ simButtons }}" as="b" hint-placeholder-count="3">
-                <div onClick="{{ b.click }}" style="{{ b.style }}">{{ b.label }}</div>
+                <div onClick="{{ b.click }}" style="{{ b.style }}" style-hover="border-color:rgba(120,215,255,.9);color:#dff2ff;transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 22px rgba(53,182,255,.45)" style-active="transform:translateY(0) scale(.95)">{{ b.label }}</div>
               </sc-for>
             </div>
             <sc-if value="{{ simRunning }}" hint-placeholder-val="{{ false }}">
@@ -522,7 +574,7 @@ a:hover{color:#ffe9a8}
 
         <sc-if value="{{ tabTests }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;gap:6px;overflow:auto;flex:1">
-            <div onClick="{{ runTests }}" style="padding:8px;border-radius:10px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.18em;background:linear-gradient(180deg,#ffe9a8,#c9930c);color:#2a1c00;cursor:pointer;user-select:none;box-shadow:0 6px 16px rgba(0,0,0,.5)">TESTS AUSFÜHREN</div>
+            <div onClick="{{ runTests }}" style-hover="filter:brightness(1.15);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.7),0 0 26px rgba(245,197,66,.5)" style-active="transform:translateY(0) scale(.96)" style="transition:transform .16s cubic-bezier(.2,1.3,.4,1),box-shadow .18s ease,filter .16s ease;padding:8px;border-radius:10px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.18em;background:linear-gradient(180deg,#ffe9a8,#c9930c);color:#2a1c00;cursor:pointer;user-select:none;box-shadow:0 6px 16px rgba(0,0,0,.5)">TESTS AUSFÜHREN</div>
             <div style="{{ testSummaryStyle }}">{{ testSummary }}</div>
             <sc-for list="{{ testRows }}" as="t" hint-placeholder-count="0">
               <div style="display:flex;gap:6px;align-items:flex-start;font-size:10px;line-height:1.4;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)">
@@ -727,6 +779,50 @@ class Component extends DCLogic {
   MUSIC_VOL = 0.32;
   BOOM_SRC = 'audio/boom.mp3';
   FS_SRC = 'audio/freespins.mp3';
+  CLICK_SRC = 'audio/click.mp3';
+
+  /* Klick-Geräusch für alle Knöpfe: ein kleiner Pool, damit schnelle
+     Mehrfachklicks sich nicht gegenseitig abschneiden. */
+  initClick(){
+    this._clickPool = [];
+    for (let i = 0; i < 4; i++){
+      const a = new Audio(new URL(this.CLICK_SRC, document.baseURI).href);
+      a.preload = 'auto'; a.volume = 0.5;
+      this._clickPool.push(a);
+    }
+    this._clickIdx = 0;
+    this._onAnyClick = (e)=>{
+      let el = e.target, hit = false;
+      for (let i = 0; el && i < 5; i++, el = el.parentElement){
+        if (el.nodeType !== 1) break;
+        const cs = getComputedStyle(el);
+        if (cs.cursor === 'pointer' || cs.cursor === 'ew-resize'){ hit = true; break; }
+      }
+      if (hit) this.playClick();
+    };
+    document.addEventListener('pointerdown', this._onAnyClick, true);
+  }
+  playClick(){
+    if (!this._clickPool || !this._clickPool.length) return;
+    const a = this._clickPool[this._clickIdx];
+    this._clickIdx = (this._clickIdx + 1) % this._clickPool.length;
+    try { a.currentTime = 0; const p = a.play(); if (p && p.catch) p.catch(()=>{}); } catch(e){}
+  }
+
+  /* Symbol-Zuordnung fest am Bauteil: gameMath bleibt die Quelle der Wahrheit
+     und überschreibt diese Werte beim Laden, aber ohne sie würde ein
+     Neuaufbau der Logik alle Felder auf das Ass zurückfallen lassen. */
+  IMG  = { a:'sym_a', j:'sym_j', q:'sym_q', k:'sym_k', pills:'sym_pills',
+           dumbbell:'sym_dumbbell', whey:'sym_whey', peptid:'sym_peptid',
+           testo:'sym_testo', tanga:'sym_tanga' };
+  TIER = { a:'low', j:'low', q:'low', k:'low', pills:'mid', dumbbell:'mid',
+           whey:'mid', peptid:'high', testo:'high', tanga:'high' };
+  COL  = { a:'#3f8fe0', j:'#31c257', q:'#ec2a8c', k:'#f5c542', pills:'#35b6ff',
+           dumbbell:'#ff3b3b', whey:'#ff7a5c', peptid:'#2ea8ff',
+           testo:'#39e05a', tanga:'#ff2ea6' };
+  NAME = { a:'ASS', j:'BUBE', q:'DAME', k:'KÖNIG', pills:'BLUE PILLS',
+           dumbbell:'HANTEL', whey:'WHEY', peptid:'PEPTIDES',
+           testo:'TESTO', tanga:'TANGA' };
 
   /* Einmalig beim Eintritt in die Freispiele. */
   playFsSound(){
@@ -876,13 +972,14 @@ class Component extends DCLogic {
     /* Nur echter Twitch-Chat — keine erfundenen Nachrichten mehr. */
     this.connectTwitch('kubafps');
     this.connectKick();
+    this.initClick();
     try {
       const [gm, en, cl] = await Promise.all([ import('./gameMath.js'), import('./engine.js'), import('./chatLines.js') ]);
       if (!this._m) return;
       this.gm = gm; this.en = en;
       if (cl && cl.CHAT_LINES && cl.CHAT_LINES.length) this.IDLE = cl.CHAT_LINES;
-      this.COL = {}; this.IMG = {}; this.NAME = {}; this.TIER = {};
       gm.SYMBOLS.forEach(s=>{ this.COL[s.id]=s.color; this.IMG[s.id]=s.img; this.NAME[s.id]=s.name; this.TIER[s.id]=s.tier; });
+      this._artCache = {};
       this.math = gm.clonePreset(this.state.mathId);
       this.engine = new en.GameEngine(this.math, new en.RNG());
       this.setState({ ready:true, grid:this.engine.idleGrid(), msg:'BEREIT' });
@@ -898,6 +995,7 @@ class Component extends DCLogic {
     this.closeSocket();
     this.closeKick();
     clearInterval(this._clock);
+    if (this._onAnyClick) document.removeEventListener('pointerdown', this._onAnyClick, true);
     if (this.simEngine) this.simEngine.cancel();
   }
 
@@ -1528,6 +1626,7 @@ class Component extends DCLogic {
       const on = s.ante === k;
       return { label:a.label, cost:a.costMultiplier+'× EINSATZ',
         style:{ flex:'1 1 0', minWidth:0, padding:'9px 4px', borderRadius:'10px', textAlign:'center', cursor:'pointer', userSelect:'none',
+          transition:'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, filter .16s ease',
           background: on ? 'linear-gradient(180deg,#ffefc0,#d69f10)' : 'linear-gradient(180deg,#243350,#0d1524)',
           border:'1px solid '+(on ? 'rgba(255,255,255,.75)' : 'rgba(245,197,66,.28)'),
           color: on ? '#241700' : '#e6eefb',
@@ -1544,14 +1643,16 @@ class Component extends DCLogic {
         ? '2× Einsatz · rund 5-fach erhöhte Trigger-CHANCE — nicht 5× so viele Scatter.'
         : '7× Einsatz (Konfigurationswert) · ~5-fach erhöhte Trigger-Chance + Multiplikator-Floor 5×.';
 
+    const HOVER_TR = 'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, background .18s ease, filter .16s ease';
     const btnOn = (col) => ({ padding:'8px 10px', borderRadius:'10px', cursor: s.busy ? 'default' : 'pointer',
       userSelect:'none', background:'linear-gradient(180deg,rgba(53,182,255,.42),rgba(6,52,92,.85))',
       border:'2px solid '+col, color:'#eaf8ff', opacity: s.busy ? .5 : 1,
-      display:'flex', flexDirection:'column', gap:'2px',
+      display:'flex', flexDirection:'column', gap:'2px', transition:HOVER_TR,
       boxShadow:'0 0 24px rgba(53,182,255,.55),inset 0 1px 0 rgba(255,255,255,.24)' });
     const btn = (bg, border, color) => ({ padding:'8px 10px', borderRadius:'10px', cursor: s.busy ? 'default' : 'pointer',
       userSelect:'none', background:bg, border:'1px solid '+border, color, opacity: s.busy ? .45 : 1,
-      display:'flex', flexDirection:'column', gap:'2px', boxShadow:'inset 0 1px 0 rgba(255,255,255,.12),0 6px 16px rgba(0,0,0,.5)' });
+      display:'flex', flexDirection:'column', gap:'2px', transition:HOVER_TR,
+      boxShadow:'inset 0 1px 0 rgba(255,255,255,.12),0 6px 16px rgba(0,0,0,.5)' });
 
     const b = s.banner;
     const tierCol = b ? (b.tier==='MAX WIN' ? '#ffffff' : b.x>=100 ? '#ff2ea6' : b.x>=50 ? '#f5c542' : b.x>=25 ? '#35b6ff' : '#ffe9a8') : '#f5c542';
@@ -1560,6 +1661,7 @@ class Component extends DCLogic {
       label, click:()=>this.setState({ tab:k }),
       style:{ flex:'1 1 0', minWidth:0, padding:'6px 2px', borderRadius:'8px', textAlign:'center', fontSize:'9.5px',
         fontWeight:700, letterSpacing:'.14em', cursor:'pointer', userSelect:'none',
+        transition:'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, color .18s ease',
         background: s.tab===k ? 'linear-gradient(180deg,rgba(53,182,255,.32),rgba(10,40,70,.5))' : 'rgba(255,255,255,.05)',
         border:'1px solid '+(s.tab===k ? 'rgba(53,182,255,.6)' : 'rgba(255,255,255,.1)'),
         color: s.tab===k ? '#9fdcff' : '#7e8ea8' }
@@ -1626,6 +1728,7 @@ class Component extends DCLogic {
       label, click:()=>this.runSim(n),
       style:{ flex:'1 1 0', padding:'7px 2px', borderRadius:'8px', textAlign:'center', fontSize:'9.5px', fontWeight:700,
         letterSpacing:'.12em', cursor: s.sim.running ? 'default' : 'pointer', userSelect:'none',
+        transition:'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, color .18s ease',
         background: s.sim.running ? 'rgba(255,255,255,.05)' : 'linear-gradient(180deg,rgba(53,182,255,.24),rgba(8,34,60,.5))',
         border:'1px solid rgba(53,182,255,.45)', color:'#9fdcff', opacity: s.sim.running ? .45 : 1 }
     }));
@@ -1670,16 +1773,19 @@ class Component extends DCLogic {
         return {
           num: String(i+1), title: t.title, artist: t.artist,
           click: ()=>this.pickTrack(i),
-          style: { display:'flex', alignItems:'center', gap:'11px', padding:'11px 11px', borderRadius:'12px',
-            cursor:'pointer', userSelect:'none',
+          style: { position:'relative', display:'flex', alignItems:'center', gap:'11px', padding:'11px 11px',
+            borderRadius:'12px', cursor:'pointer', userSelect:'none', overflow:'hidden',
+            transition:'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, background .18s ease',
             background: on ? 'linear-gradient(180deg,rgba(255,110,199,.34),rgba(74,0,44,.72))' : 'linear-gradient(180deg,#161f33,#0a1120)',
             border:'1px solid '+(on ? 'rgba(255,150,225,.75)' : 'rgba(255,255,255,.1)'),
             boxShadow: on ? '0 0 20px rgba(255,46,166,.35),inset 0 1px 0 rgba(255,255,255,.2)' : 'inset 0 1px 0 rgba(255,255,255,.07)' },
           badge: { width:'24px', height:'24px', flex:'0 0 auto', borderRadius:'7px', display:'grid', placeItems:'center',
             fontFamily:'Anton, sans-serif', fontSize:'13px',
+            transition:'transform .16s cubic-bezier(.2,1.4,.4,1), box-shadow .18s ease, background .18s ease, color .18s ease',
             background: on ? 'linear-gradient(180deg,#ffd6f1,#ff6ec7)' : 'rgba(255,255,255,.08)',
             color: on ? '#4a002c' : '#7e8ea8' },
           titleStyle: { fontFamily:'Anton, sans-serif', fontSize:'15px', letterSpacing:'.04em', lineHeight:1.15,
+            transition:'color .18s ease, text-shadow .18s ease',
             color: on ? '#fff' : '#c8d6e8', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' },
           artistStyle: { fontSize:'9.5px', letterSpacing:'.06em', color: on ? '#ffd6f1' : '#69788f',
             whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' },
@@ -1692,6 +1798,7 @@ class Component extends DCLogic {
       musicPowerLabel: s.sound ? 'AN' : 'AUS',
       musicPowerStyle: { padding:'5px 14px', borderRadius:'9px', fontSize:'11px', fontWeight:700, letterSpacing:'.18em',
         cursor:'pointer', userSelect:'none',
+        transition:'filter .16s ease, box-shadow .18s ease, transform .14s cubic-bezier(.2,1.4,.4,1)',
         background: s.sound ? 'linear-gradient(180deg,#ffd6f1,#ff6ec7)' : 'rgba(255,255,255,.07)',
         border:'1px solid '+(s.sound ? 'rgba(255,190,235,.8)' : 'rgba(255,255,255,.14)'),
         color: s.sound ? '#4a002c' : '#7e8ea8' },
@@ -1736,6 +1843,23 @@ class Component extends DCLogic {
       volMove: (e)=>{ if (!this._volDrag) return;
         const r = e.currentTarget.getBoundingClientRect(); this.setVol((e.clientX - r.left) / r.width); },
       volUp: ()=>{ this._volDrag = false; },
+      /* Lauflichter am Kabinettrand: pink in den Freispielen, sonst gold,
+         schneller solange gedreht wird. */
+      marquee: (()=>{
+        const N = 14, fsOn = s.fs.active, out = [];
+        const col = fsOn ? '#ff8ade' : '#ffe9a8';
+        const glow = fsOn ? 'rgba(255,46,166,.9)' : 'rgba(245,197,66,.85)';
+        const dur = s.busy ? 0.85 : 1.7;
+        for (let i = 0; i < N; i++){
+          out.push({ s: {
+            width:'6px', height:'6px', borderRadius:'50%', background:col,
+            boxShadow:'0 0 9px ' + glow + ', 0 0 3px #fff',
+            animation:'bulbChase ' + dur + 's ease-in-out infinite',
+            animationDelay: (i * (dur / N)) + 's'
+          } });
+        }
+        return out;
+      })(),
       volIcon: s.sound ? '❚❚' : '▶',
 
       nowPlaying: (this.TRACKS[s.track] || {}).title || '—',
@@ -1797,15 +1921,18 @@ class Component extends DCLogic {
       seekFwd: ()=>this.nudge(10),
       seekBtn: { padding:'5px 7px', borderRadius:'8px', fontSize:'8.5px', letterSpacing:'.04em',
         cursor:'pointer', userSelect:'none', color:'#c9b78a', whiteSpace:'nowrap',
+        transition:'border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .14s cubic-bezier(.2,1.4,.4,1)',
         background:'linear-gradient(180deg,#1d283f,#0b1220)', border:'1px solid rgba(245,197,66,.28)' },
       seekPlayBtn: { width:'32px', height:'26px', borderRadius:'8px', display:'grid', placeItems:'center',
         fontSize:'10px', cursor:'pointer', userSelect:'none',
+        transition:'border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .14s cubic-bezier(.2,1.4,.4,1)',
         color: s.sound ? '#ffd6f1' : '#8fa3bd',
         background: s.sound ? 'linear-gradient(180deg,rgba(255,110,199,.34),rgba(74,0,44,.72))' : 'rgba(255,255,255,.07)',
         border:'1px solid '+(s.sound ? 'rgba(255,150,225,.7)' : 'rgba(255,255,255,.14)'),
         boxShadow: s.sound ? '0 0 14px rgba(255,46,166,.4)' : 'none' },
       volIconStyle: { width:'30px', height:'30px', flex:'0 0 auto', borderRadius:'9px', display:'grid',
         placeItems:'center', fontSize:'11px', cursor:'pointer', userSelect:'none',
+        transition:'border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .14s cubic-bezier(.2,1.4,.4,1)',
         color: s.sound ? '#ffd6f1' : '#8fa3bd',
         background: s.sound ? 'linear-gradient(180deg,rgba(255,110,199,.32),rgba(74,0,44,.7))' : 'rgba(255,255,255,.07)',
         border:'1px solid '+(s.sound ? 'rgba(255,150,225,.7)' : 'rgba(255,255,255,.14)'),
@@ -1876,6 +2003,10 @@ class Component extends DCLogic {
       betTxt: this.money(s.bet * (s.armed && M ? M.specialSpinParameters[s.armed==='ss1'?'superSpin1':'superSpin2'].costMultiplier : (anteCfg ? anteCfg.costMultiplier : 1))),
       winTxt: this.money(s.win),
       statusMsg: s.msg,
+      statusTextStyle: { position:'relative', fontFamily:'Anton, sans-serif', fontSize:'14px',
+        letterSpacing:'.14em',
+        color: s.fs.active ? '#ffd6f1' : s.busy ? '#ffe9a8' : '#c9ffd8',
+        textShadow: '0 0 14px ' + (s.fs.active ? 'rgba(255,46,166,.9)' : s.busy ? 'rgba(245,197,66,.85)' : 'rgba(95,224,138,.75)') },
       statusDot: { width:'8px', height:'8px', borderRadius:'50%', background: s.busy ? '#f5c542' : '#5fe08a',
         boxShadow:'0 0 12px '+(s.busy ? '#f5c542' : '#5fe08a'), animation: s.busy ? 'glowPulse .7s ease-in-out infinite' : 'none' },
 
@@ -1926,6 +2057,7 @@ class Component extends DCLogic {
       spamBtnLabel: s.spamKind ? 'SPAM ' + s.spamLeft + 's' : 'SPAM',
       spamBtnStyle: { flex:'0 0 auto', padding:'6px 11px', borderRadius:'8px', textAlign:'center',
         fontFamily:'Anton, sans-serif', fontSize:'12px', letterSpacing:'.14em', cursor:'pointer', userSelect:'none',
+        transition:HOVER_TR + ', color .18s ease',
         background: s.spamKind ? 'linear-gradient(180deg,#ff7ccd,#a80066)' : 'linear-gradient(180deg,#2a2000,#0e0b00)',
         border:'1px solid ' + (s.spamKind ? 'rgba(255,190,235,.7)' : 'rgba(245,197,66,.85)'),
         color: s.spamKind ? '#fff' : '#f5c542',
@@ -1940,6 +2072,7 @@ class Component extends DCLogic {
       spamOptions: ['ZURÄÄÄÄÄÄCHT','W','KUBABONUSCOM'].map(k=>({
         label:k, click:()=>this.startSpam(k),
         style:{ padding:'10px 11px', borderRadius:'10px', fontFamily:'Anton, sans-serif', fontSize:'13px',
+          transition:'transform .16s cubic-bezier(.2,1.3,.4,1), box-shadow .18s ease, border-color .18s ease, color .18s ease',
           letterSpacing:'.08em', cursor:'pointer', userSelect:'none', textAlign:'center',
           background:'linear-gradient(180deg,rgba(245,197,66,.2),rgba(70,48,0,.5))',
           border:'1px solid rgba(245,197,66,.55)', color:'#ffe9a8' }
@@ -1966,19 +2099,49 @@ class Component extends DCLogic {
         background: s.tests.length ? (passed===s.tests.length ? 'rgba(95,224,138,.14)' : 'rgba(255,46,110,.16)') : 'rgba(255,255,255,.05)',
         color: s.tests.length ? (passed===s.tests.length ? '#5fe08a' : '#ffb3c7') : '#7e8ea8' },
 
+      readoutBox: { flex:'1 1 auto', minWidth:'106px', padding:'5px 12px', borderRadius:'10px',
+        background:'linear-gradient(180deg,#070c16,#03060d)',
+        border:'1px solid rgba(255,255,255,.12)',
+        boxShadow:'inset 0 2px 8px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.04)' },
+      readoutWinBox: { flex:'1 1 auto', minWidth:'106px', textAlign:'right', padding:'5px 12px', borderRadius:'10px',
+        background:'linear-gradient(180deg,#0d0a04,#040301)',
+        border:'1px solid ' + (s.win > 0 ? 'rgba(245,197,66,.55)' : 'rgba(245,197,66,.18)'),
+        boxShadow: s.win > 0
+          ? 'inset 0 2px 8px rgba(0,0,0,.9),0 0 22px rgba(245,197,66,.28)'
+          : 'inset 0 2px 8px rgba(0,0,0,.9)' },
+
+      spinSub: s.busy ? '' : (s.armed ? 'BEREIT' : (s.autoLeft > 0 ? 'AUTO' : '')),
+      spinLabelStyle: { position:'relative', fontFamily:'Anton, sans-serif',
+        fontSize: s.busy ? '26px' : '23px', letterSpacing:'.04em', lineHeight:1,
+        color:'#2a1c00', textShadow:'0 1px 0 rgba(255,255,255,.62),0 -1px 0 rgba(0,0,0,.25)' },
+      spinSubStyle: { position:'relative', fontSize:'7.5px', fontWeight:700, letterSpacing:'.26em',
+        marginTop:'1px', color:'rgba(42,28,0,.62)' },
+      spinHalo: { position:'absolute', inset:'-16px', borderRadius:'50%',
+        background:'radial-gradient(circle,' + (fsOn ? 'rgba(255,110,199,.4)' : 'rgba(245,197,66,.34)') + ',transparent 66%)',
+        animation:'neonBreathe 2.4s ease-in-out infinite', pointerEvents:'none' },
+      spinBezel: { position:'absolute', inset:'-4px', borderRadius:'50%',
+        background:'conic-gradient(#6d4800,#ffe9a8 12%,#8a6a1c 26%,#fff6cf 40%,#6d4800 54%,#ffe9a8 68%,#8a6a1c 82%,#fff6cf 94%,#6d4800)',
+        boxShadow:'0 8px 22px rgba(0,0,0,.85),inset 0 0 0 1px rgba(0,0,0,.5)', pointerEvents:'none' },
+      spinGloss: { position:'absolute', left:'16%', top:'9%', width:'68%', height:'40%',
+        borderRadius:'50%', background:'linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,0))',
+        filter:'blur(1px)', pointerEvents:'none' },
       spinLabel: s.busy ? '•••' : (!s.ready ? '…' : s.armed === 'ss1' ? 'S1' : s.armed === 'ss2' ? 'S2' : 'SPIN'),
-      spinWrap: { position:'relative', width:'100px', height:'100px', flex:'0 0 auto', borderRadius:'50%',
+      spinWrap: { position:'relative', width:'116px', height:'116px', flex:'0 0 auto', borderRadius:'50%',
         cursor: s.busy || !s.ready ? 'default' : 'pointer', userSelect:'none',
-        opacity: s.busy || !s.ready ? .6 : 1, transition:'opacity .2s' },
-      spinRing: { position:'absolute', inset:0, borderRadius:'50%',
-        background:'conic-gradient(from 0deg,transparent 0 60%,'+(fsOn?'rgba(255,110,199,.95)':'rgba(245,197,66,.95)')+' 80%,rgba(255,255,255,.95) 92%,transparent 100%)',
-        animation:'spinSlow 2.4s linear infinite', filter:'blur(2px)' },
-      spinFace: { position:'absolute', inset:'6px', borderRadius:'50%', display:'grid', placeItems:'center',
+        opacity: s.busy || !s.ready ? .72 : 1,
+        transform: s.busy ? 'scale(.96)' : 'scale(1)',
+        transition:'opacity .2s, transform .18s cubic-bezier(.2,1.4,.4,1)' },
+      spinRing: { position:'absolute', inset:'-1px', borderRadius:'50%',
+        background:'conic-gradient(from 0deg,transparent 0 58%,'+(fsOn?'rgba(255,110,199,.98)':'rgba(255,233,168,.98)')+' 80%,#fff 92%,transparent 100%)',
+        animation:'spinSlow ' + (s.busy ? '.7s' : '2.4s') + ' linear infinite',
+        filter:'blur(2px)', pointerEvents:'none' },
+      spinFace: { position:'absolute', inset:'9px', borderRadius:'50%',
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
         background: fsOn
-          ? 'radial-gradient(circle at 50% 28%,#ffd6f1 0%,#ff7ccd 32%,#c0006f 66%,#5c0034 100%)'
-          : 'radial-gradient(circle at 50% 28%,#fff6d6 0%,#ffdf85 30%,#d59b12 64%,#7a5200 100%)',
-        boxShadow:'0 0 36px '+(fsOn?'rgba(255,110,199,.6)':'rgba(245,197,66,.55)')+', inset 0 -8px 16px rgba(60,35,0,.55), inset 0 8px 14px rgba(255,255,255,.65)',
-        border:'2px solid rgba(255,255,255,.45)' },
+          ? 'radial-gradient(circle at 50% 24%,#fff 0%,#ffd6f1 16%,#ff7ccd 44%,#c0006f 74%,#4d002c 100%)'
+          : 'radial-gradient(circle at 50% 24%,#fffdf2 0%,#fff2c0 16%,#ffd469 44%,#c98d0a 74%,#6b4600 100%)',
+        boxShadow:'0 0 40px '+(fsOn?'rgba(255,110,199,.65)':'rgba(245,197,66,.6)')+', inset 0 -12px 22px rgba(60,35,0,.6), inset 0 10px 18px rgba(255,255,255,.72), inset 0 0 0 1px rgba(255,255,255,.5)',
+        border:'2px solid rgba(255,255,255,.5)', overflow:'hidden' },
       onSpin: ()=>this.doSpin(s.armed || 'normal'),
 
       betUp: ()=>{ if (s.busy || !M) return; const L=M.betLevels; const i=L.indexOf(s.bet); this.setState({ bet:L[Math.min(L.length-1, i+1)] }); },
@@ -2014,7 +2177,7 @@ class Component extends DCLogic {
       },
       autoLabel: s.autoLeft > 0 ? 'STOP ('+s.autoLeft+')' : 'AUTO ' + (s.autoSize || 25),
       autoStyle: { padding:'7px 10px', borderRadius:'9px', textAlign:'center', fontSize:'10px', fontWeight:700,
-        letterSpacing:'.14em', cursor:'pointer', userSelect:'none',
+        letterSpacing:'.14em', cursor:'pointer', userSelect:'none', transition:HOVER_TR,
         background: s.autoLeft>0 ? 'linear-gradient(180deg,#ff7ccd,#a80066)' : 'linear-gradient(180deg,#1d283f,#0b1220)',
         border:'1px solid '+(s.autoLeft>0 ? 'rgba(255,190,235,.6)' : 'rgba(255,255,255,.13)'),
         color: s.autoLeft>0 ? '#fff' : '#8fa3bd', boxShadow:'inset 0 1px 0 rgba(255,255,255,.1)' },
@@ -2030,7 +2193,7 @@ class Component extends DCLogic {
       },
       toggleTurbo: ()=>this.setState(x=>({ turbo:!x.turbo })),
       turboStyle: { padding:'7px 10px', borderRadius:'9px', textAlign:'center', fontSize:'10px', fontWeight:700,
-        letterSpacing:'.14em', cursor:'pointer', userSelect:'none',
+        letterSpacing:'.14em', cursor:'pointer', userSelect:'none', transition:HOVER_TR,
         background: s.turbo ? 'linear-gradient(180deg,#ffe9a8,#c9930c)' : 'linear-gradient(180deg,#1d283f,#0b1220)',
         border:'1px solid '+(s.turbo ? 'rgba(255,255,255,.6)' : 'rgba(255,255,255,.13)'),
         color: s.turbo ? '#2a1c00' : '#8fa3bd', boxShadow:'inset 0 1px 0 rgba(255,255,255,.1)' },
