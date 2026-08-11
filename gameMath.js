@@ -26,16 +26,16 @@ export const UNKNOWN = 'UNKNOWN_PUBLIC_PROBABILITY';
 
 /* --- Symbole (eigenes Thema, keine fremden Assets) ------------------------ */
 export const SYMBOLS = [
-  { id: 'a',        name: 'ASS',      tier: 'low',  color: '#3f8fe0', img: 'sym_a' },
+  { id: 'a',        name: 'ASS',      tier: 'low',  color: '#f5c542', img: 'sym_a' },
   { id: 'j',        name: 'BUBE',     tier: 'low',  color: '#31c257', img: 'sym_j' },
-  { id: 'q',        name: 'DAME',     tier: 'low',  color: '#ec2a8c', img: 'sym_q' },
-  { id: 'k',        name: 'KÖNIG',    tier: 'low',  color: '#f5c542', img: 'sym_k' },
+  { id: 'q',        name: 'DAME',     tier: 'low',  color: '#a855f7', img: 'sym_q' },
+  { id: 'k',        name: 'KÖNIG',    tier: 'low',  color: '#9fb4ce', img: 'sym_k' },
   { id: 'pills',    name: 'BLUE PILLS', tier: 'mid', color: '#35b6ff', img: 'sym_pills' },
-  { id: 'dumbbell', name: 'HANTEL',   tier: 'mid',  color: '#ff3b3b', img: 'sym_dumbbell' },
-  { id: 'whey',     name: 'WHEY',     tier: 'mid',  color: '#ff7a5c', img: 'sym_whey' },
-  { id: 'peptid',   name: 'PEPTIDES', tier: 'high', color: '#2ea8ff', img: 'sym_peptid' },
-  { id: 'testo',    name: 'TESTO',    tier: 'high', color: '#39e05a', img: 'sym_testo' },
-  { id: 'tanga',    name: 'TANGA',    tier: 'high', color: '#ff2ea6', img: 'sym_tanga' }
+  { id: 'dumbbell', name: 'HANTEL',   tier: 'mid',  color: '#c8d4e4', img: 'sym_dumbbell' },
+  { id: 'whey',     name: 'CASH',     tier: 'mid',  color: '#c9a2ff', img: 'sym_whey' },
+  { id: 'peptid',   name: 'SPRITZE',  tier: 'high', color: '#cfe4f5', img: 'sym_peptid' },
+  { id: 'testo',    name: 'TESTO',    tier: 'high', color: '#e8eef6', img: 'sym_testo' },
+  { id: 'tanga',    name: 'TANGA',    tier: 'high', color: '#ff2e4d', img: 'sym_tanga' }
 ];
 export const SYMBOL_IDS = SYMBOLS.map(s => s.id);
 /* Bildsymbole = alles ausser den Kartenwerten. Wird fuer den Bild-Boost der
